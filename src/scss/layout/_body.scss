@@ -4,12 +4,14 @@
 }
 
 body {
+    width: 100vw;
     background-color: $main-backgroud-color;
     font-family: 'Ubuntu';
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 
 a {
