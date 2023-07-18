@@ -1,0 +1,55 @@
+@import '../base/mixins';
+@import '../base/vars';
+.features {
+    display: grid;
+    font-family: 'Rubik';
+    grid-template: 2fr 1fr 4fr / 5fr 8fr;
+    &__figure {
+        grid-area: 1/1/4/2;
+        margin-right: 100px;
+    }
+    &__logo {}
+    &__title {
+        margin-top: auto;
+        grid-area: 1/2/2/3;
+        font-family: 'Rubik';
+        font-weight: 500;
+        font-size: 35px;
+    }
+    &__list-description {
+        margin-top: 15px;
+        grid-area: 2/2/3/3;
+        font-weight: 400;
+        font-size: 16px;
+    }
+    &__features-list {
+        grid-area: 3/2/3/4;
+    }
+    &__feature {
+        margin: 5px 0;
+        line-height: 50px;
+        background: url(bx_bxs-check-circle.svg) no-repeat left center;
+        justify-content: flex-start;
+        &::marker {
+            position: relative;
+            top: 100%;
+        }
+    }
+    &__feature-content {
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: $tablet) {
+    .features {
+        display: flex;
+        flex-direction: column;
+        &__figure {
+            display: none;
+        }
+        &__features-list {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}

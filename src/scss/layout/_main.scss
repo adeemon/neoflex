@@ -1,0 +1,8 @@
+@import '../base/mixins';
+@import '../base/vars';
+main {
+    @include flexCenter;
+    flex-direction: column;
+    gap: 50px;
+    @include blocksPadding;
+}

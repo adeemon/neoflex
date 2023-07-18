@@ -1,0 +1,33 @@
+@import '../base/mixins';
+@import '../base/vars';
+.map {
+    @include flexCenter;
+    gap: 20px;
+    flex-direction: column;
+    // .map__title
+    &__title {
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+    // .map__description
+    &__description {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+    // .map__image-container
+    &__image-container {
+        width: 90vw;
+    }
+    // .map__image
+    &__image {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}

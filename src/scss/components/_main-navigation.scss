@@ -1,0 +1,27 @@
+@import '../base/vars';
+.main-navigation {
+    @include flexCenter;
+    flex-direction: row;
+    gap: 20px;
+    // .main-navigation__element
+    &__element {
+        width: auto;
+    }
+    // .main-navigation__link
+    &__link {
+        width: auto;
+        color: inherit;
+        &:hover,
+        &:focus {
+            color: #B2A35F;
+        }
+    }
+}
+
+@media (max-width: $tablet) {
+    .main-navigation {
+        width: 100%;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+}

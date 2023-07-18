@@ -1,0 +1,92 @@
+        @import '../base/vars';
+        @import '../base/mixins';
+        @import '../components/extra-navigation';
+        .footer {
+            @include blocksPadding;
+            background-color: $grey-footer-color;
+            height: auto;
+            width: 100%;
+            display: grid;
+            grid-template: 1fr 1fr 2fr 2fr / 3fr 3fr 3fr;
+            // .footer__logo
+            &__logo {
+                grid-area: 1/1/3/2;
+            }
+            &__contacts {
+                grid-area: 1/3/span 2/ span 2;
+                margin-left: auto;
+            }
+            // .footer__phone
+            &__phone {
+                color: black;
+                //grid-area: 1 / 3 / 2 / 4;
+                display: flex;
+                justify-content: flex-start;
+            }
+            // .footer__phone-link
+            &__phone-link {
+                &:hover {
+                    color: $link-hover-color
+                }
+            }
+            // .footer__phone-text
+            &__phone-text {
+                font-weight: 700;
+                font-size: 30px;
+                &:hover {
+                    color: $link-hover-color
+                }
+            }
+            // .footer__email
+            &__email {
+                //grid-area: 2 / 3 / 3 / 4;
+                display: flex;
+                justify-content: flex-start;
+            }
+            // .footer__email-link
+            &__email-link {}
+            // .footer__email-text
+            &__email-text {
+                color: #2D3748;
+                font-weight: 500;
+                font-size: 16px;
+                &:hover {
+                    color: $link-hover-color
+                }
+            }
+            // .footer__navigation
+            &__navigation {
+                padding: 25px 0;
+                grid-area: 3/1/4/4;
+                font-weight: 500;
+                font-size: 16px;
+            }
+            // .footer__cookie-info
+            &__cookie-info {
+                border-top: 2px $white solid;
+                padding-top: 20px;
+                grid-area: 4/1/5/4
+            }
+        }
+        
+        @media (min-width: $mobile) and (max-width: $tablet) {
+            .footer {
+                grid-template: 1fr 1fr 2fr 2fr / 2fr 2fr 4fr;
+            }
+        }
+        
+        @media (max-width: $mobile) {
+            .footer {
+                grid-template: 1fr 1fr 4fr 4fr / 3fr 1fr 4fr;
+                &__phone-text {
+                    font-weight: 700;
+                    font-size: 20px;
+                }
+            }
+        }
+        
+        @media (min-width: $desktop) {
+            .footer {
+                grid-template: 1fr 1fr 2fr 2fr / 3fr 3fr 2fr;
+            }
+        }
