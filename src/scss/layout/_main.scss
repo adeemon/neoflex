@@ -3,6 +3,15 @@
 main {
     @include flexCenter;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
     @include blocksPadding;
+    &> :last-child {
+        margin-bottom: 25px
+    }
+}
+
+@media (max-width: $mobile) {
+    main> :last-child {
+        margin-bottom: 10px;
+    }
 }

@@ -1,0 +1,23 @@
+@import '../base/mixins';
+@import '../base/vars';
+.sub-button {
+    width: auto;
+    height: auto;
+    @include flexCenter;
+    flex-direction: row;
+    &__content {}
+}
+
+@media (max-width: $tablet) {
+    .sub-button {
+        &__content {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .sub-button {
+        padding: 5px;
+    }
+}

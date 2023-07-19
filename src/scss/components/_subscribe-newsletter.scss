@@ -1,0 +1,111 @@
+@import '../base/mixins';
+@import '../base/vars';
+@import './sub-button';
+.news-sub {
+    @include flexCenter;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    width: 40%;
+    &__title {
+        text-align: center;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 147.4%;
+        /* 44.22px */
+        letter-spacing: 0.6px;
+        gap: 10px;
+    }
+    &__sub-content {
+        text-align: center;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 147.4%;
+        /* 44.22px */
+        letter-spacing: 0.6px;
+    }
+    &__form {
+        @include flexCenter;
+        justify-content: space-between;
+        gap: 10px;
+        border-radius: 20px;
+        padding: 20px 20px;
+        width: 100%;
+        background: #FFF;
+        box-shadow: 0px 10px 20px 0px rgba(54, 58, 120, 0.10);
+    }
+    &__letter-svg {}
+    &__email-input {
+        width: 80%;
+        background-image: url('./email 1.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-left: 30px;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-family: 'Nunito Sans';
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 147.4%;
+        /* 29.48px */
+        color: #9092B0;
+        &::placeholder {
+            font-family: 'Nunito Sans';
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 147.4%;
+        }
+    }
+    &__submit-button {
+        border-radius: 20px;
+        background: #686DF1;
+        border: none;
+        padding: 15px;
+        color: $white;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 126.9%;
+    }
+}
+
+@media (max-width: $mobile) {
+    .news-sub {
+        width: 90%;
+        // .news-sub__title-block
+        &__title-block {}
+        // .news-sub__title
+        &__title {
+            font-size: 20px;
+        }
+        // .news-sub__sub-content
+        &__sub-content {
+            font-size: 20px;
+        }
+        // .news-sub__form
+        &__form {
+            padding: 10px 15px;
+        }
+        // .news-sub__email-input
+        &__email-input {}
+        // .news-sub__submit-button
+        &__submit-button {}
+    }
+    .sub-button {
+        // .sub-button__icon
+        &__icon {}
+        // .sub-button__content
+        &__content {}
+    }
+}
+
+@media (min-width: $mobile) and (max-width: $tablet) {
+    .news-sub {
+        width: 60%;
+    }
+}
