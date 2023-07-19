@@ -929,6 +929,14 @@ main > :last-child {
   margin: auto 0;
 }
 .exchange__rate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   margin: 15px 0;
   width: 33%;
 }
@@ -984,6 +992,14 @@ main > :last-child {
   .exchange__rate {
     margin: 10px 0;
     width: 30%;
+  }
+}
+@media (max-width: 500px) {
+  .exchange__rate {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 }
 /**

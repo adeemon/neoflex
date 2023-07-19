@@ -31,6 +31,9 @@
         margin: auto 0;
     }
     &__rate {
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
         margin: 15px 0;
         width: 33%;
     }
@@ -81,6 +84,14 @@
         &__rate {
             margin: 10px 0;
             width: 30%;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .exchange {
+        &__rate {
+            flex-direction: column;
         }
     }
 }
