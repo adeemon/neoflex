@@ -6,6 +6,10 @@
     @include flexCenter;
     flex-direction: row;
     &__content {}
+    &__icon {
+        @include flexCenter;
+        margin-top: -6px;
+    }
 }
 
 @media (max-width: $tablet) {
