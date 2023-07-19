@@ -2,23 +2,22 @@
 @import '../base/vars';
 .features {
     display: grid;
-    font-family: 'Rubik';
     grid-template: 2fr 1fr 4fr / 5fr 8fr;
+    font-family: 'Rubik';
     &__figure {
         grid-area: 1/1/4/2;
         margin-right: 100px;
     }
-    &__logo {}
     &__title {
-        margin-top: auto;
         grid-area: 1/2/2/3;
+        margin-top: auto;
         font-family: 'Rubik';
         font-weight: 500;
         font-size: 35px;
     }
     &__list-description {
-        margin-top: 15px;
         grid-area: 2/2/3/3;
+        margin-top: 15px;
         font-weight: 400;
         font-size: 16px;
     }
@@ -28,7 +27,7 @@
     &__feature {
         margin: 5px 0;
         line-height: 50px;
-        background: url(bx_bxs-check-circle.svg) no-repeat left center;
+        background: url("../images/design/bx_bxs-check-circle.png") no-repeat left center;
         justify-content: flex-start;
         &::marker {
             position: relative;

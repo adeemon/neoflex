@@ -1,11 +1,10 @@
 @import '../base/mixins';
 @import '../base/vars';
 .sub-button {
-    width: auto;
-    height: auto;
     @include flexCenter;
     flex-direction: row;
-    &__content {}
+    width: auto;
+    height: auto;
     &__icon {
         @include flexCenter;
         margin-top: -6px;
