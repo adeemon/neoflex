@@ -1,0 +1,45 @@
+/**
+ * Fonts
+*/
+
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../src/assets/fonts/Ubuntu-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: bold;
+    font-weight: 700;
+    src: url('../src/assets/fonts/Ubuntu-Bold.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: bold;
+    font-weight: 500;
+    src: url('../src/assets/fonts/Ubuntu-Medium.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: bold;
+    font-weight: 500;
+    src: url('../src/assets/fonts/Rubik-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../src/assets/fonts/NunitoSans_7pt-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../src/assets/fonts/Rubik-Regular.ttf') format("truetype");
+}

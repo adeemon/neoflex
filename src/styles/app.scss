@@ -1,0 +1,40 @@
+/* By Athlon Front-End Team */
+
+
+/* Core variables */
+
+@import '../modules/Module_1/styles/vars';
+
+/* CSS Reset */
+
+@import '../modules/Module_1/styles/reset';
+
+/* CSS print */
+
+@import '../modules/Module_1/styles/print';
+
+/* Fonts */
+
+@import '../modules/Module_1/styles/fonts';
+
+/* Mixins, helpers and functions */
+
+@import '../modules/Module_1/styles/mixins';
+
+/* Vendor */
+
+
+/* Components */
+
+@import '../modules/Module_1/styles/body';
+@import '../modules/Module_1/styles/header';
+@import '../modules/Module_1/styles/footer';
+@import '../modules/Module_1/styles/card-designs';
+@import '../modules/Module_1/styles/features';
+@import '../modules/Module_1/styles/main';
+@import '../modules/Module_1/styles/exchange';
+@import '../modules/Module_1/styles/map';
+@import '../modules/Module_1/styles/support';
+@import '../modules/Module_1/styles/subscribe-newsletter';
+@import '../modules/Module_1/styles/main-navigation';
+@import '../modules/Module_1/styles/sub-button';
