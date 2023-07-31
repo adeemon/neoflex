@@ -1,0 +1,97 @@
+@import './mixins';
+@import './vars';
+.exchange {
+    display: grid;
+    grid-template: 1fr 1fr 2fr 1fr / 1fr 2fr;
+    padding: 32px;
+    border-radius: 28px;
+    width: 100%;
+    background: linear-gradient(360deg, rgba(178, 178, 178, 0.80) 0%, rgba(178, 178, 178, 0.00) 100%), rgba(244, 244, 244, 0.90);
+    box-shadow: 0px 2px 4px 0px rgba(187, 187, 187, 0.20), 0px 0px 4px 0px rgba(0, 0, 0, 0.08);
+    &__title {
+        grid-area: 1/1/2/2;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+    }
+    &__currency {
+        grid-area: 2/1/3/2;
+        margin: 10px 0;
+        color: $black;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+    }
+    &__rate-table {
+        grid-area: 3/1/4/2;
+        display: flex;
+        flex-flow: row wrap;
+        margin: auto 0;
+    }
+    &__rate {
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        margin: 15px 0;
+        width: 33%;
+    }
+    &__currency-title {
+        color: #808080;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 112%;
+        letter-spacing: 0.4px;
+    }
+    &__currency-value {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 112%;
+        letter-spacing: 0.4px;
+    }
+    &__all-courses {
+        grid-area: 4/1/5/2;
+        margin-top: auto;
+        color: $white;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 112%;
+        letter-spacing: 0.4px;
+    }
+    &__update-desc {
+        grid-area: 1/2/2/3;
+        margin-left: auto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+    }
+    &__logo-container {
+        grid-area: 3/2/4/3;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: $tablet) {
+    .exchange {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        &__rate {
+            margin: 10px 0;
+            width: 30%;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .exchange {
+        &__rate {
+            flex-direction: column;
+        }
+    }
+}

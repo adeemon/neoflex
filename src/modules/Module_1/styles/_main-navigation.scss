@@ -1,0 +1,26 @@
+@import './mixins';
+@import './vars';
+.main-navigation {
+    @include flexCenter;
+    flex-direction: row;
+    gap: 20px;
+    &__element {
+        width: auto;
+    }
+    &__link {
+        width: auto;
+        color: inherit;
+        &:hover,
+        &:focus {
+            color: #B2A35F;
+        }
+    }
+}
+
+@media (max-width: $tablet) {
+    .main-navigation {
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+    }
+}
