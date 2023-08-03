@@ -31,7 +31,7 @@ export function getNewsFromNewsFetch(newsFetchResult) {
 
 export async function getNewsHTMLArray(amountOfNews) {
     let fetchedNews = await fetchNews(amountOfNews);
-    preloadNewsImages(fetchedNews.articles);
+    //preloadNewsImages(fetchedNews);
     let output = getNewsFromNewsFetch(fetchedNews.articles);
     output = output.map((element) => mapNewsToHTMLItem(element));
     return output;
@@ -40,11 +40,15 @@ export async function getNewsHTMLArray(amountOfNews) {
 export function mapNewsToHTMLItem(news) {
     const filteredTitle = flilterText(news.title);
     const filteredDescription = flilterText(news.description)
+
+    const newsApiPlaceHolderUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/E%21_News_logo.svg/1200px-E%21_News_logo.svg.png';
+    preloadImage(newsApiPlaceHolderUrl);
+
     let output = `
     <a href="${news.url}" target="_blank"
         <artice class="news-article">
             <figure class="news-article__image">
-                <img src="${news.urlToImage}" alt="${news.title} image">
+                <img src="${news.urlToImage||newsApiPlaceHolderUrl}" alt="${news.title} image">
             </figure>
             <p class="news-article__title">${filteredTitle}</p>
             <p class="news-article__body">${filteredDescription}</p>
@@ -80,6 +84,6 @@ export function getAmountRenderedNews() {
 export async function preloadNewsImages(newsArray) {
     let arrayToPreload = await newsArray;
     arrayToPreload.forEach((news) => {
-        news.urlToImage && preloadImage(news.urlToImage);
+        news.urlToImage && preloadImages(news.urlToImage);
     })
 }
