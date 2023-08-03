@@ -1,57 +1,56 @@
-@import '../../../assets/styles/mixins';
-@import '../../../assets/styles//vars';
-.news {
-    width: 100 % ;
-    @include flexCenter;
-    flex - direction: column;
-    gap: 48 px; &
-    __buttons {
-        width: 100 % ;
-        @include flexCenter;
-        justify - content: flex - end;
-        flex - direction: row;
-        gap: 30 px;
-    } &
-    __button {
-        @include flexCenter;
-        padding: 8 px;
-        width: 64 px;
-        height: 64 px;
-        border - radius: 50 px;
-        border: 1 px solid $button - active - color;
-        background: white;
-        background - color: $button - active - color;
-        svg {
-            stroke: white;
-        } &
-        : disabled {
-            background - color: white;;
-            svg {
-                stroke: $black - letters - color;
-            }
-        } &
-        : hover, &
-        : focus {
-            border: 3 px solid $link - hover - color
-        }
-    } &
-    __articles - wrapper {
-        @include flexCenter;
-        flex - direction: row;
-        flex - wrap: wrap;
-        justify - content: space - between;
-        gap: 30 px;
+export class GigachadSlider {
+    constructor(elementsArray, amountsToShow, previousButtonId, nextButtonId, contentWrapperId) {
+        this.elementsArray = elementsArray;
+        this.amountsToShow = amountsToShow;
+        this.previousButton = document.querySelector(previousButtonId);
+        this.nextButton = document.querySelector(nextButtonId);
+        this.contentWrapper = document.querySelector(contentWrapperId);
+        this.currentItem = 0;
+        this.onNextHandler = this.onNext.bind(this);
+        this.onPreviousHandler = this.onPrevious.bind(this);
+        this.nextButton.addEventListener('click', this.onNextHandler);
+        this.previousButton.addEventListener('click', this.onPreviousHandler);
     }
-}
-}
-else if (this.currentItem + this.amountsToShow === this.elementsArray.length) {
-    this.nextButton.disabled = true;
-} else {
-    this.previousButton.disabled = false;
-    this.nextButton.disabled = false;
-}
-}
-setNewAmountToShow(newAmount) {
-    this.amountsToShow = newAmount;
-}
+    render() {
+        try {
+            this.checkButtons();
+            const itemsToRender = this.elementsArray.slice(this.currentItem, this.currentItem + this.amountsToShow).join('');
+            this.contentWrapper.innerHTML = itemsToRender;
+
+        } catch {
+            console.error('Ошибка слайдера. Невзоможно отрендерить элементы.')
+        }
+    }
+
+    onPrevious() {
+        try {
+            this.currentItem--;
+            this.render();
+        } catch (error) {
+            console.error('Невозможно выполнить промотку назад.')
+        }
+    }
+
+    onNext() {
+        try {
+            this.currentItem++;
+            this.render();
+        } catch (error) {
+            console.error('Невозможно выполнить промотку вперед')
+        }
+    }
+
+    checkButtons() {
+        if (this.currentItem === 0) {
+            this.previousButton.disabled = true;
+        } else if (this.currentItem + this.amountsToShow === this.elementsArray.length) {
+            this.nextButton.disabled = true;
+        } else {
+            this.previousButton.disabled = false;
+            this.nextButton.disabled = false;
+        }
+    }
+    setNewAmountToShow(newAmount) {
+        this.amountsToShow = newAmount;
+    }
 }
