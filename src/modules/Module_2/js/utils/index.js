@@ -1,19 +1,9 @@
-import { subscribeCurrency } from "../api";
-
-export function setNewExchangeValue(currency, value) {
-    try {
-        let selector = `#EXCHANGE_${currency.toUpperCase()}`;
-        let currencyDisplay = document.querySelector(selector);
-        currencyDisplay.innerHTML = value;
-    } catch {
-        console.error('Произошла ошибка в обновлении курса обмена');
-    }
+export function flilterText(inputText) {
+    const hashtagsRegex = new RegExp('#[^\s]{1,}\s');
+    return inputText ? inputText.replace(hashtagsRegex, '') : '';
 }
 
-export function subscribeOnExchange() {
-    const currencysArray = ['USD', 'CNY', 'CHF', 'EUR', 'JPY', 'TRY'];
-
-    currencysArray.forEach((currency) => {
-        subscribeCurrency(currency);
-    })
+export function preloadImage(url) {
+    let img = new Image();
+    img.src = url;
 }
