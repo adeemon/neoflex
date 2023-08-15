@@ -1,5 +1,5 @@
 export class GigachadSlider {
-    constructor(elementsArray, amountsToShow, previousButtonId, nextButtonId, contentWrapperId) {
+    constructor(elementsArray, amountsToShow, previousButtonId, nextButtonId, contentWrapperId, scrollStep) {
         this.elementsArray = elementsArray;
         this.amountsToShow = amountsToShow;
         this.previousButton = document.querySelector(previousButtonId);
@@ -10,13 +10,13 @@ export class GigachadSlider {
         this.onPreviousHandler = this.onPrevious.bind(this);
         this.nextButton.addEventListener('click', this.onNextHandler);
         this.previousButton.addEventListener('click', this.onPreviousHandler);
+        this.scrollStep = scrollStep;
+        this.contentWrapper.onscroll = this.checkButtons.bind(this);
     }
     render() {
         try {
             this.checkButtons();
-            const itemsToRender = this.elementsArray.slice(this.currentItem, this.currentItem + this.amountsToShow).join('');
-            this.contentWrapper.innerHTML = itemsToRender;
-
+            this.contentWrapper.innerHTML = this.elementsArray;
         } catch {
             console.error('Ошибка слайдера. Невзоможно отрендерить элементы.')
         }
@@ -24,8 +24,11 @@ export class GigachadSlider {
 
     onPrevious() {
         try {
-            this.currentItem--;
-            this.render();
+            this.contentWrapper.scrollLeft -= this.scrollStep;
+            console.log(this.contentWrapper.scrollLeft);
+            console.log(this.contentWrapper.scrollLeft + this.scrollStep);
+            console.log(this.maxScroll);
+            this.checkButtons();
         } catch (error) {
             console.error('Невозможно выполнить промотку назад.')
         }
@@ -33,17 +36,23 @@ export class GigachadSlider {
 
     onNext() {
         try {
-            this.currentItem++;
-            this.render();
+            this.contentWrapper.scrollLeft += this.scrollStep;
+            console.log(this.contentWrapper.scrollLeft);
+            console.log(this.contentWrapper.scrollLeft + this.scrollStep);
+            console.log(this.maxScroll);
+            console.log(this.contentWrapper.scrollWidth);
+            console.log(this.contentWrapper.clientWidth)
+            this.checkButtons();
         } catch (error) {
             console.error('Невозможно выполнить промотку вперед')
         }
     }
 
     checkButtons() {
-        if (this.currentItem === 0) {
+        const maxScroll = this.contentWrapper.scrollWidth - this.contentWrapper.clientWidth;
+        if (this.contentWrapper.scrollLeft === 0) {
             this.previousButton.disabled = true;
-        } else if (this.currentItem + this.amountsToShow === this.elementsArray.length) {
+        } else if (this.contentWrapper.scrollLeft >= maxScroll) {
             this.nextButton.disabled = true;
         } else {
             this.previousButton.disabled = false;

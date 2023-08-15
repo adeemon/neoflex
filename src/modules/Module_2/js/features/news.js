@@ -6,10 +6,11 @@ export async function newsHandler(amountOfNews) {
     const nextButtonId = '#news__next';
     const previousButtonID = '#news__previous';
     const articlesWrapperId = '#news__desktop-container';
-    const slider = new GigachadSlider(await getNewsHTMLArray(amountOfNews), getAmountRenderedNews(), previousButtonID, nextButtonId, articlesWrapperId);
+    const scrollStep = 100;
+    const slider = new GigachadSlider(await getNewsHTMLArray(amountOfNews), amountOfNews, previousButtonID, nextButtonId, articlesWrapperId, scrollStep);
     slider.render();
     window.onresize = (() => {
-        slider.setNewAmountToShow(getAmountRenderedNews());
+        slider.setNewAmountToShow(amountOfNews);
         slider.render();
     });
 }
@@ -74,9 +75,9 @@ export function getAmountRenderedNews() {
     if (currentSize <= mobileWidth) {
         return 1;
     } else if (currentSize > tabletWidth) {
-        return 4;
+        return 2;
     } else if (currentSize > desktopWidth) {
-        return 6;
+        return 4;
     }
     return 2
 }

@@ -1,10 +1,10 @@
 @import '../../../assets/styles/mixins';
 @import '../../../assets/styles//vars';
 .news {
-    width: 100%;
     @include flexCenter;
     flex-direction: column;
     gap: 48px;
+    width: 100%;
     &__buttons {
         width: 100%;
         @include flexCenter;
@@ -39,8 +39,11 @@
     &__articles-wrapper {
         @include flexCenter;
         flex-direction: row;
-        flex-wrap: wrap;
+        overflow: hidden;
         justify-content: space-between;
         gap: 30px;
+        height: 480px;
+        width: 95vw;
+        padding: 5px;
     }
 }
