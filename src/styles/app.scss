@@ -3,11 +3,11 @@
 
 /* Core variables */
 
-@import '../modules/Module_1/styles/vars';
+@import '../assets/styles/vars';
 
 /* CSS Reset */
 
-@import '../modules/Module_1/styles/reset';
+@import '../assets/styles/reset';
 
 /* CSS print */
 
@@ -19,7 +19,7 @@
 
 /* Mixins, helpers and functions */
 
-@import '../modules/Module_1/styles/mixins';
+@import '../assets/styles/mixins';
 
 /* Vendor */
 
@@ -38,3 +38,5 @@
 @import '../modules/Module_1/styles/subscribe-newsletter';
 @import '../modules/Module_1/styles/main-navigation';
 @import '../modules/Module_1/styles/sub-button';
+@import '../modules/Module_2/styles/news-article';
+@import '../modules/Module_2/styles/news'
