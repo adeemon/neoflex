@@ -24,3 +24,13 @@ export async function fetchCurrency(currency: String) {
         console.error('Ошибка в получении данных с сервера обмена валют')
     }
 }
+
+export async function postEmail(email: string) {
+    fetch('/email', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(email)
+    })
+}

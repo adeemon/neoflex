@@ -25,7 +25,7 @@ export const NewsWrapper: React.FC<INewsWrapper> = ({newsArray, scroll = 1069}) 
         const filteredTitle = flilterText(element.title);
         const filteredDesc = flilterText(element.description || '');
         return (
-            <NewsArticle urlToImage={element.urlToImage} title={filteredTitle} description={filteredDesc} url={element.url} />
+            <NewsArticle urlToImage={element.urlToImage} title={filteredTitle} description={filteredDesc} url={element.url} key={element.title}/>
         )
     })
     return (

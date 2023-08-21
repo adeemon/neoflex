@@ -1,11 +1,8 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import { INews, NewsArticle } from './newsArtcle/NewsArticle';
+import { INews } from './newsArtcle/NewsArticle';
 import defaultImage from '../../assets/images/content/demo1 1.png';
-import PreviousIcon from '../../assets/images/design/Transfer_long_left_light.svg'
-import NextIcon from '../../assets/images/design/Transfer_long_left_right.svg'
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
-import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 import { NewsWrapper } from './newsContainer/NewsWrapper';
 import { fetchNews } from '../../api';
 
@@ -17,7 +14,6 @@ desciption: 'Ethereum is moving closer to adopting a proof-of-stake model for it
 export const News: React.FC = () => {
 
     const [scroll, setScroll] = useState(0);
-    const inputRef = React.useRef() as React.MutableRefObject<HTMLInputElement>;
     let wrapperElement = document.querySelector('#news__desktop-container');
     const [maxWidth, setMaxWidth] = useState(0);
     const [clientWidth, setClientWidth] = useState(0);

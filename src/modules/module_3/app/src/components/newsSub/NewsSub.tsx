@@ -1,13 +1,34 @@
 import * as React from 'react';
+import { postEmail } from '../../api';
+import { readCookie, writeCookie } from '../../utils';
 
 export const NewsSub: React.FC = () => {
+    const [isSubscribed, setIsSubscribed] = React.useState(false);
+    React.useEffect(() => {
+        if (readCookie('email')) {
+            console.log(readCookie('email'));
+            setIsSubscribed(true)
+        }
+    })
     return (
-        <section className="news-sub">
+        <>
+        {isSubscribed ? <div className="news-sub__title">You are already subscribed to the bank's newsletter</div> :
+            <section className="news-sub">
             <div className="news-sub__title-block">
                 <h2 className="news-sub__title">Subscribe Newsletter & get</h2>
             </div>
             <p className="news-sub__sub-content">Bank News</p>
-            <form action="" className="news-sub__form">
+            <form action="" className="news-sub__form" onSubmit={(e:React.SyntheticEvent) => {
+                e.preventDefault();
+                const target = e.target as typeof e.target & {
+                    userEmail: { value: string };
+                };
+                const email = target.userEmail.value;
+                postEmail(email);
+                writeCookie('email', email, 30);
+                console.log(email)
+                setIsSubscribed(true);
+            }}>
                 <input type="email" className="news-sub__email-input" name="userEmail" id="newsletterEmail" placeholder="Your email" />
                 <button className="news-sub__submit-button sub-button" type="submit">
                     <svg className="sub-button__icon"
@@ -25,5 +46,7 @@ export const NewsSub: React.FC = () => {
                 </button>
             </form>
         </section>
+        }
+        </>
     )
 }
