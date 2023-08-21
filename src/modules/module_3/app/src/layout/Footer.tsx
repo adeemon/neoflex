@@ -1,11 +1,10 @@
 import companyLogo from '../assets/images/content/logo 1.png'
+import { ImageFigured } from '../components/ui-toolkit/imageFigured/ImageFigured';
 
 function Footer() {
     return (
         <footer className="footer">
-        <figure className="footer__logo">
-            <img src={companyLogo} alt="NeoBank Logo" />
-        </figure>
+        <ImageFigured className='footer_logo' alt='NeoBank Logo' src={companyLogo} />
         <div className="footer__contacts">
             <address className="footer__phone">
                 <a className="footer__phone-link" href="tel:+74959842513" aria-label="Позвонить по телефону">

@@ -1,3 +1,5 @@
+import { ButtonMain } from "../components/ui-toolkit/buttonMain/ButtonMain";
+
 function Header() {
   return (
     <header className="header">
@@ -34,11 +36,7 @@ function Header() {
                 </li>
             </ul>
         </nav>
-        <button className="header__lk-button">
-          <span className="header_lk-button-text">
-            Online Bank
-          </span>
-        </button>
+        <ButtonMain className="header__lk-button" label="Online Bank"/>
     </header>
   );
 }

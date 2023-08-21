@@ -1,9 +1,20 @@
+import * as React from 'react';
 import firstCard from '../../assets/images/content/cards/cardImage1 1.svg';
 import secondCard from '../../assets/images/content/cards/cardImage2 1.svg';
 import thirdCard from '../../assets/images/content/cards/cardImage3 1.svg';
 import fourCard from '../../assets/images/content/cards/cardImage4 1.svg';
+import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 
-function CardDesigns () {
+const deisgnsArray: Array<string> = [firstCard, secondCard, thirdCard, fourCard];
+const disignsToRender = deisgnsArray.map((designPath) => {
+    return (
+        <li className="card-designs__design-example" key={designPath}>
+            <ImageFigured className='card-designs__design-figure' src={designPath} />
+        </li>
+    )
+});
+
+const CardDesigns: React.FC = () => {
     return (
         <section className="card-designs">
             <h2 className="card-designs__text">
@@ -13,26 +24,7 @@ function CardDesigns () {
             <span className="card-designs__button-label">Choose the card</span>
           </button>
             <ul className="card-designs__designs-list">
-                <li className="card-designs__design-example">
-                    <figure className="card-designs__design-figure">
-                        <img src={firstCard} alt="Blue wave design" className="card-designs__design-image" />
-                    </figure>
-                </li>
-                <li className="card-designs__design-example">
-                    <figure className="card-designs__design-figure">
-                        <img src={secondCard} alt="Planet design" className="card-designs__design-image" />
-                    </figure>
-                </li>
-                <li className="card-designs__design-example">
-                    <figure className="card-designs__design-figure">
-                        <img src={thirdCard} alt="Light design" className="card-designs__design-image" />
-                    </figure>
-                </li>
-                <li className="card-designs__design-example">
-                    <figure className="card-designs__design-figure">
-                        <img src={fourCard} alt="Space design" className="card-designs__design-image" />
-                    </figure>
-                </li>
+                {disignsToRender}
             </ul>
         </section>
     )
