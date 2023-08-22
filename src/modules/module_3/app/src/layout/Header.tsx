@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="header">
         <p className="header__company-name">
-            <a className="header__homepage-link" href="#" >
+            <a className="header__homepage-link" href="/" >
               NeoBank
             </a>
         </p>

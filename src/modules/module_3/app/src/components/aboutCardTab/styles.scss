@@ -1,0 +1,12 @@
+.aboutCardTab {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    & div {
+        width: 30%;
+    }
+    & div:nth-last-child(-n + 2) {
+        width: 45%;
+    }
+}
