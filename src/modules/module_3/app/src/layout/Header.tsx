@@ -15,7 +15,7 @@ function Header() {
         <nav className="header__nav">
             <ul className="main-navigation">
                 <li className="main-navigation__element">
-                    <a className="main-navigation__link" href="#" target="_self" >
+                    <a className="main-navigation__link" href="/loan" target="_self" >
                       Credit card
                     </a>
                 </li>
