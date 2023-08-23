@@ -1,3 +1,5 @@
+import { Accorderon } from "../components/accordeon/Accordeon";
+
 export function flilterText(inputText: string) {
     const hashtagsRegex = new RegExp('#[^\s]{1,}\s');
     return inputText ? inputText.replace(hashtagsRegex, '') : '';
