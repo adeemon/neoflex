@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import { ButtonMain } from "../components/ui-toolkit/buttonMain/ButtonMain";
 
 function Header() {
   return (
     <header className="header">
-        <p className="header__company-name">
-            <a className="header__homepage-link" href="/" >
+        <p className ="header__company-name">
+            <Link to="/" className="header__homepage-link" >
               NeoBank
-            </a>
+            </Link>
         </p>
         <input id="menu-toggle" type="checkbox" />
         <label className="menu-btn" htmlFor="menu-toggle">
@@ -15,9 +16,9 @@ function Header() {
         <nav className="header__nav">
             <ul className="main-navigation">
                 <li className="main-navigation__element">
-                    <a className="main-navigation__link" href="/loan" target="_self" >
-                      Credit card
-                    </a>
+                  <Link to='/loan' className="main-navigation__link">
+                    Credit card
+                  </Link>
                 </li>
                 <li className="main-navigation__element">
                     <a className="main-navigation__link" href="#" target="_self" >
