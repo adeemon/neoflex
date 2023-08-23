@@ -1,0 +1,9 @@
+.cashback-tab {
+    @include flexCenter;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__card {
+        margin-bottom: 40px;
+        width: 32%;
+    }
+}
