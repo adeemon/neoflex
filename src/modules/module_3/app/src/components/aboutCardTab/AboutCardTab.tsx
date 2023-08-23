@@ -52,7 +52,12 @@ const cardsToRender = content.map((element) => {
 export const AboutCardTab: React.FC = () => {
     return (
         <section className="aboutCardTab">
-            {cardsToRender}
+            <div className="aboutCardTab__smallCards">
+                {cardsToRender.slice(0, 3)}
+            </div>
+            <div className="aboutCardTab__bigCards">
+                {cardsToRender.slice(-2)}
+            </div>
         </section>
     )
 }
