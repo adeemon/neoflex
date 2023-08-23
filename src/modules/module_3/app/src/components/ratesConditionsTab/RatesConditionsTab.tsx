@@ -39,10 +39,8 @@ const infoToRender = Object.entries(info).map((infoNote) => {
     )
 })
 
-export const RatesConditions: React.FC = () => {
-    React.useEffect(()=> {
-        console.log(Object.entries(info))
-    }) 
+export const RatesConditionsTab: React.FC = () => {
+    
     return (
         <section className="rates-conditions">
             {infoToRender}

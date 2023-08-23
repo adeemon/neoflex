@@ -1,10 +1,7 @@
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import { PlatinumCardAdv } from '../components/platinumCardAdv/platinumCardAdv';
-import { AboutCardTab } from '../components/aboutCardTab/AboutCardTab';
-import { RatesConditions } from '../components/ratesConditions/RatesConditions';
-import { CashbackTab } from '../components/cashbackTab/CashbackTab';
-import { FAQTab } from '../components/faqTab/FAQTab';
+import { TabsManager } from '../components/tabsManager/TabsManager';
 
 export const Loan: React.FC = () => {
   return (
@@ -12,7 +9,7 @@ export const Loan: React.FC = () => {
         <Header />
         <main>
             <PlatinumCardAdv />
-            <FAQTab />
+            <TabsManager />
         </main>
         <Footer />
     </>

@@ -1,19 +1,18 @@
 .aboutCardTab {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    &__smallCards {
+    gap: 40px;
+    &__smallCards, &__bigCards {
         @include flexCenter;
         justify-content: space-between;
-        gap: auto;
+        gap: 40px;
+    }
+    &__smallCards {
         & .infoCardIcon {
             width: 32%
         }
     }
     &__bigCards {
-        @include flexCenter;
-        justify-content: space-between;
-        gap: auto;
         & .infoCardIcon {
             width: 49%
         }
