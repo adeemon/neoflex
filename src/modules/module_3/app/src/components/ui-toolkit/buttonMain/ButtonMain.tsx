@@ -8,7 +8,7 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
 
 export const ButtonMain: React.FC<IButtonProps> = ({className, children, label, isDisabled = false, ...props}) => {
     return (
-        <button className={className} onClick={props.onClick} disabled={isDisabled}>
+        <button className={`${className} default-button`} onClick={props.onClick} disabled={isDisabled}>
             {label ? label : ''}
             {children}
       </button>

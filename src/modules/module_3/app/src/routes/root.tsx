@@ -8,6 +8,7 @@ import { News } from '../components/news/News';
 import { NewsSub } from '../components/newsSub/NewsSub';
 import { Support } from '../components/support/Support';
 
+
 function App() {
   return (
         <>

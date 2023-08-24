@@ -4,18 +4,15 @@ import { RatesConditionsTab } from '../ratesConditionsTab/RatesConditionsTab';
 import { CashbackTab } from '../cashbackTab/CashbackTab';
 import { FAQTab } from '../faqTab/FAQTab';
 
-const tabs = {
-    'About card': <AboutCardTab />,
-    'Rates and conditions': <RatesConditionsTab />,
-    'Cashback': <CashbackTab />,
-    'FAQ': <FAQTab />
+export interface ITabsPair {
+    name: string,
+    component: JSX.Element,
 }
 
-const tabsMap = new Map(Object.entries(tabs))
-
-const tabsList = new Array(Object.keys(tabs));
-
-export const TabsManager: React.FC = () => {
+export interface ITabsManagerProps {
+    tabsArray: Array<ITabsPair>
+}
+export const TabsManager: React.FC<ITabsManagerProps> = ({tabsArray}) => {
     const [activeTab, setActiveTab] = React.useState('About card');
 
     const onCLickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,6 +22,13 @@ export const TabsManager: React.FC = () => {
         setActiveTab(clickedTab)
     }
 
+    const tabsToRender = tabsArray.map((note) => {
+        return (
+            <button className={`tabs-manager__tab${activeTab===note.name ? '-active' : ''}`} 
+                    onClick={onCLickHandler} key={note.name}>{note.name}</button>
+        )
+    })
+
     React.useEffect(()=> {
         console.log('rerender');
     }, [activeTab])
@@ -32,18 +36,11 @@ export const TabsManager: React.FC = () => {
     return (
         <section className="tabs-manager">
             <div className="tabs-manager__tabs-container">
-                <button className={`tabs-manager__tab${activeTab==='About card' ? '-active' : ''}`} 
-                    onClick={onCLickHandler}>About card</button>
-                <button className={`tabs-manager__tab${activeTab==='Rates and conditions' ? '-active' : ''}`} 
-                    onClick={onCLickHandler}>Rates and conditions</button>
-                <button className={`tabs-manager__tab${activeTab==='Cashback' ? '-active' : ''}`} 
-                    onClick={onCLickHandler}>Cashback</button>
-                <button className={`tabs-manager__tab${activeTab==='FAQ' ? '-active' : ''}`} 
-                    onClick={onCLickHandler}>FAQ</button>
+                {tabsToRender}
                 <div className="tabs-manager__spacer"></div>
             </div>
             <div className="tabs-manager__content">
-                {tabsMap.get(activeTab)}
+                {tabsArray.filter((note) => note.name===activeTab)[0].component}
             </div>
         </section>
     )

@@ -41,23 +41,28 @@ const content:Array<IInfoCardIconProps> = [
 
 const cardsToRender = content.map((element) => {
     return (
-        <InfoCardIcon isOdd={element.isOdd}
-        title={element.title}
-        description={element.description}
-        IconComponent={element.IconComponent}
-        />
+        <>
+            <InfoCardIcon isOdd={element.isOdd}
+            title={element.title}
+            description={element.description}
+            IconComponent={element.IconComponent}
+            key={element.title}
+            />
+        </>
     )
 })
 
 export const AboutCardTab: React.FC = () => {
     return (
-        <section className="aboutCardTab">
-            <div className="aboutCardTab__smallCards">
-                {cardsToRender.slice(0, 3)}
-            </div>
-            <div className="aboutCardTab__bigCards">
-                {cardsToRender.slice(-2)}
-            </div>
-        </section>
+        <React.Fragment>
+            <section className="aboutCardTab">
+                <div className="aboutCardTab__smallCards">
+                    {cardsToRender.slice(0, 3)}
+                </div>
+                <div className="aboutCardTab__bigCards">
+                    {cardsToRender.slice(-2)}
+                </div>
+            </section>
+        </React.Fragment>
     )
 }
