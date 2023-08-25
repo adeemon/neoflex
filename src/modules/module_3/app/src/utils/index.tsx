@@ -1,4 +1,5 @@
 import { Accorderon } from "../components/accordeon/Accordeon";
+import { parse } from "date-fns";
 
 export function flilterText(inputText: string) {
     const hashtagsRegex = new RegExp('#[^\s]{1,}\s');
@@ -17,3 +18,9 @@ export function readCookie(key: string) {
       ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
+export function parseDateString(value: string, originalValue: string | Date) {
+    return originalValue instanceof Date
+      ? originalValue  // this make sure that a value is provided
+      : parse(originalValue, "dd.MM.yyyy", new Date());
+  }

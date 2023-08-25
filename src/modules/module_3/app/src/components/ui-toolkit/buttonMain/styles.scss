@@ -1,4 +1,6 @@
 .default-button {
+    border-radius: 16px;
+    @include defaultButton;
     &:hover,
     &:focus {
         background-color: #7796c0;

@@ -1,0 +1,46 @@
+.select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__container {
+        display: flex;
+        padding: 0 8px 0 16px;
+        height: 40px;
+        border-radius: 6px;
+        background: #f9f5e3;
+        color: black;
+        font-size: 14px;
+        font-family: "Ubuntu";
+        font-weight: 400;
+        line-height: 14px;
+        word-wrap: break-word;
+        &::placeholder {
+            color: #808080;
+            font-size: 14px;
+            font-family: "Ubuntu";
+            font-weight: 400;
+            line-height: 14px;
+            word-wrap: break-word
+        }
+        &:hover, &:focus {
+            border: 2px solid #B4387A;
+        }
+    }
+    &__field {
+        width: 100%;
+       background: transparent;
+       border: none;
+    }
+    &__error-message {
+        color: #FF5631;
+        font-size: 16px;
+        font-family: "Ubuntu";
+        font-weight: 500;
+        line-height: 16px;
+        word-wrap: break-word
+    }
+    &__option {
+        border: none;
+        background-color: none;
+    }
+}
