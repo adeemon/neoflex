@@ -1,6 +1,5 @@
 import { forwardRef, HTMLInputTypeAttribute } from "react";
 
-import { string } from "yup";
 import { InputFieldIcon } from "../ui-toolkit/inputFieldIcon/inputFieldIcon";
 
 interface InputProps {

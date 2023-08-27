@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import { INews } from './newsArtcle/NewsArticle';
+import { INews } from '../newsArtcle/NewsArticle';
 import defaultImage from '../../assets/images/content/demo1 1.png';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
-import { NewsWrapper } from './newsContainer/NewsWrapper';
+import { NewsWrapper } from '../newsWrapper/NewsWrapper';
 import { fetchNews } from '../../api';
 
 const scrollStep = 100;

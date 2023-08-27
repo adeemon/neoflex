@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { INews, NewsArticle } from '../newsArtcle/NewsArticle';
-import defaultImage from '../../../assets/images/content/demo1 1.png';
-import { flilterText } from '../../../utils';
+import { flilterText } from '../../utils';
 
 export interface INewsWrapper {
     newsArray?: Array<INews>,

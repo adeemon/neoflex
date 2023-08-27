@@ -1,20 +1,17 @@
-import { ErrorMessage } from '@hookform/error-message';
 import * as React from 'react';
-import { useForm, Controller, SubmitHandler, UseFormRegister, FieldValues } from "react-hook-form"
-import { Path } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler} from "react-hook-form"
 import { Input } from '../input/Input';
 import * as Yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Label } from '../label/Label';
-import { object, string, date, InferType } from 'yup';
-import {parse, format, subYears} from 'date-fns';
+import { string, InferType } from 'yup';
+import {format, subYears} from 'date-fns';
 import { Select } from '../select/Select';
 import { parseDateString } from '../../utils';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Slider } from '../ui-toolkit/slider/Slider';
 import { Spinner } from '../spinner/Spinner';
 import { postCustom } from '../../api';
-import { json } from 'stream/consumers';
 
 const formDataSchema = Yup.object({
     lastName: string().required('Enter your last name'),
@@ -44,18 +41,6 @@ const formDataSchema = Yup.object({
 })
 
 type TFormData = InferType<typeof formDataSchema>
-
-// export interface IFormInputs extends FieldValues {
-//     amount: number,
-//     term: number,
-//     firstName: string,
-//     lastName: string,
-//     middleName: string | null,
-//     email: string,
-//     birthdate: string | Date,
-//     passportSeries: string,
-//     passportNumber: string
-// }
 
 export const PrescoringForm: React.FC = () => {
     const [isValidated, setIsValidated] = React.useState(false);

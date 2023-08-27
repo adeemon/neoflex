@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ImageFigured } from '../../ui-toolkit/imageFigured/ImageFigured';
-import defaultImage from '../../../assets/images/content/demo1 1.png';
+import defaultImage from '../../assets/images/content/demo1 1.png';
+import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 
 export interface INews {
     urlToImage: string,
