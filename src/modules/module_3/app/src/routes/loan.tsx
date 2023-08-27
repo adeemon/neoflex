@@ -34,8 +34,8 @@ export const Loan: React.FC = () => {
     <>
         <Header />
         <main>
-            <PlatinumCardAdv />
-            <TabsManager tabsArray={tabsArray}/>
+            <PlatinumCardAdv /> 
+            <TabsManager tabsArray={tabsArray}/> 
             <HowToGetCardInfo />
             <PrescoringForm />
         </main>

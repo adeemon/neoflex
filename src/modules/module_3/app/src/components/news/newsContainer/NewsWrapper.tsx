@@ -21,11 +21,11 @@ export const NewsWrapper: React.FC<INewsWrapper> = ({newsArray, scroll = 1069}) 
         });
     });
 
-    const newsToRender = newsArray?.map((element) => {
+    const newsToRender = newsArray?.map((element, index) => {
         const filteredTitle = flilterText(element.title);
         const filteredDesc = flilterText(element.description || '');
         return (
-            <NewsArticle urlToImage={element.urlToImage} title={filteredTitle} description={filteredDesc} url={element.url} key={element.title}/>
+            <NewsArticle urlToImage={element.urlToImage} title={filteredTitle} description={filteredDesc} url={element.url} key={index}/>
         )
     })
     return (

@@ -62,3 +62,18 @@
         width: 40px;
     }
 }
+
+@media screen and (max-width: $tablet) {
+    .infoCardIcon {
+        &__icon-container {
+            display: none !important;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .infoCardIcon {
+        padding: 20px;
+        height: auto;
+    }
+}

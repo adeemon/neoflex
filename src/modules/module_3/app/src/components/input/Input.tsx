@@ -12,6 +12,7 @@ interface InputProps {
   isInvalid?: boolean,
   isValidated?: boolean,
   errorMessage?: string,
+  className?: string,
   onChange: (value: string) => void,
 }
 
@@ -24,13 +25,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
   isInvalid,
   isValidated,
   errorMessage,
+  className,
   onChange
 }, ref) => (
   <div className='input__container'>
     { label && <label className='input__label' htmlFor={ name }>{ label }</label> }
     <div className={`input__field-container ${isInvalid ? 'invalid': 'valid'}`}>
         <input
-        className={`input__field`}
+        className={`${className ? className : ''} input__field`}
         ref={ ref }
         id={ name }
         name={ name }

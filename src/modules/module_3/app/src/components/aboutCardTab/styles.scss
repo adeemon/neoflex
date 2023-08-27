@@ -2,19 +2,33 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    &__smallCards, &__bigCards {
+    &__smallCards,
+    &__bigCards {
         @include flexCenter;
         justify-content: space-between;
         gap: 40px;
     }
     &__smallCards {
         & .infoCardIcon {
-            width: 32%
+            width: 32%;
         }
     }
     &__bigCards {
         & .infoCardIcon {
-            width: 49%
+            width: 49%;
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .aboutCardTab {
+        &__smallCards,
+        &__bigCards {
+            height: auto;
+            flex-direction: column;
+            & .infoCardIcon {
+                width: 90%;
+            }
         }
     }
 }

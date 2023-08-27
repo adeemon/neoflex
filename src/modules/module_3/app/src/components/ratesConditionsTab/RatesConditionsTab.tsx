@@ -17,9 +17,9 @@ const infoToRender = Object.entries(info).map((infoNote) => {
     let condition = infoNote[1];
     let jsxCondition;
     if (Array.isArray(condition)) {
-        jsxCondition = condition.map((element) => {
+        jsxCondition = condition.map((element, index) => {
             return ((
-                <p className='rates-conditions__condition'>{element}</p>
+                <p className='rates-conditions__condition' key={index}>{element}</p>
             ))
         })
     } else {

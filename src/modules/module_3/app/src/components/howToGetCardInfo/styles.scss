@@ -16,3 +16,12 @@
         gap: 100px;
     }
 }
+
+@media screen and (max-width: $mobile) {
+    .get-info {
+        &__toltips-container {
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+}

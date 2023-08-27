@@ -7,9 +7,6 @@ export interface ISliderProps {
 }
 
 export const Slider: React.FC<ISliderProps> = ({min, max, current}) => {
-    React.useEffect(()=> {
-        console.log(currentPosition);
-    })
     const currentPosition = ((current - min)/(max - min))*100;
     
     return (

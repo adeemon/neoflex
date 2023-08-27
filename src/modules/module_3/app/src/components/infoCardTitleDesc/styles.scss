@@ -15,20 +15,19 @@
         font-family: "Ubuntu";
         font-weight: 700;
         line-height: 53.06px;
-        word-wrap: break-word
-
+        word-wrap: break-word;
     }
     &__description {
         @include flexStart;
         margin-left: 0;
         width: 100%;
         margin-left: 0;
-        color: rgba(67, 67, 67, 0.90);
+        color: rgba(67, 67, 67, 0.9);
         font-size: 16px;
         font-family: "Ubuntu";
         font-weight: 500;
         line-height: 23.58px;
-        word-wrap: break-word
+        word-wrap: break-word;
     }
     &-gray {
         background: rgba(127, 146, 172, 0.7);
@@ -52,11 +51,9 @@
     }
 }
 
-.infoCardIcon__icon-container {
-    @include flexStart;
-    width: 100%;
-    & svg {
-        height: 40px;
-        width: 40px;
+@media screen and (max-width: $mobile) {
+    .infoCardTitleDesc {
+        padding: 20px;
+        height: auto;
     }
 }

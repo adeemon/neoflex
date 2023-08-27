@@ -38,7 +38,7 @@ export const PlatinumCardAdv: React.FC = () => {
                     </p>
                 </li>
             </ul>
-            <ButtonMain className='platinumCard__apply-button' label='Apply for card'/>
+            <a href='#prescoring-form'><ButtonMain className='platinumCard__apply-button' label='Apply for card'/></a>
             <ImageFigured className='platinumCard__image' src={cardImage}/>
         </section>
     )

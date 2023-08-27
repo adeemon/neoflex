@@ -6,6 +6,7 @@
     &__number {
         grid-area: 1 / 1 / 2 / 1;
         @include flexCenter;
+        margin: auto;
         width: 48px;
         height: 48px;
         border-radius: 50px;
@@ -41,6 +42,25 @@
         content: "";
         &:nth-last-child(1) {
             border-top: solid 2px rgba(128, 128, 128, 0.2);
+        }
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .tolltip-divided {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        &__divider {
+            display: none;
+        }
+        &__number {
+            margin-left: 10px;
+            width: 48px;
+            height: 48px;
+        }
+        &__content {
+            width: 80%;
         }
     }
 }

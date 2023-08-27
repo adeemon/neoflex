@@ -1,5 +1,5 @@
-@import '../../../assets/styles/mixins';
-@import '../../../assets/styles//vars';
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles//vars";
 .map {
     @include flexCenter;
     gap: 20px;
@@ -19,6 +19,7 @@
         text-align: center;
     }
     &__image-container {
+        @include flexCenter;
         width: 90vw;
     }
     &__image {

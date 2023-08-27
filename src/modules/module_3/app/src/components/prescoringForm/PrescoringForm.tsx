@@ -12,6 +12,9 @@ import { Select } from '../select/Select';
 import { parseDateString } from '../../utils';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Slider } from '../ui-toolkit/slider/Slider';
+import { Spinner } from '../spinner/Spinner';
+import { postCustom } from '../../api';
+import { json } from 'stream/consumers';
 
 const formDataSchema = Yup.object({
     lastName: string().required('Enter your last name'),
@@ -57,12 +60,14 @@ type TFormData = InferType<typeof formDataSchema>
 export const PrescoringForm: React.FC = () => {
     const [isValidated, setIsValidated] = React.useState(false);
     const [amount, setAmount] = React.useState(1);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const {handleSubmit, formState: { errors }, control} = useForm<TFormData>({
         resolver: yupResolver(formDataSchema),
         defaultValues: {
             middleName: '',
-            term:'6 month'
+            term:'6 month',
+            amount: 15000
         },
         mode:'onSubmit',
         reValidateMode:'onChange',
@@ -72,7 +77,9 @@ export const PrescoringForm: React.FC = () => {
     const onSubmit: SubmitHandler<TFormData> = (data) => {
         console.log(data);
         console.log('data')
+        imitateLoading();
         setAmount(data.amount);
+        postCustom('/application', JSON.stringify(data))
     }
 
     const onValidAttempt = () => {
@@ -80,12 +87,13 @@ export const PrescoringForm: React.FC = () => {
         
     }
 
-    const onAmountChange = (e: InputEvent) => {
-        console.log(e);
+    const imitateLoading = () => {
+        setIsLoading(true);
+        setTimeout(()=> setIsLoading(false), 10000);
     }
 
-    return (
-        <form className='prescoring-form' onSubmit={handleSubmit(onSubmit)}>
+    const form = (
+        <form className='prescoring-form' onSubmit={handleSubmit(onSubmit)} id='prescoring-form'>
             <div className="prescoring-form__customize-card">
                 <div className="prescoring-form__amount">
                     <p className="prescoring-form__title">
@@ -106,6 +114,7 @@ export const PrescoringForm: React.FC = () => {
                                 <Input
                                     type='number'
                                     errorMessage={error?.message}
+                                    className='prescoring-form__amount-content'
                                     {...field} />
                             }
                         />
@@ -113,9 +122,15 @@ export const PrescoringForm: React.FC = () => {
                     </div>
                 </div>
                 <div className="prescoring-form__result">
-
+                    <p className="prescoring-form__small-title">
+                        You have chosen the amount
+                    </p>
+                    <p className="prescoring-form__amount-content">
+                        {amount > 15000 && amount < 600000 ? amount : 'Incorrect amount'}
+                    </p>
                 </div>
             </div>
+
             <div className="prescoring-form__contact-info">
                 <p className="prescoring-form__small-title">
                     Contact information
@@ -258,5 +273,11 @@ export const PrescoringForm: React.FC = () => {
                 formAction='submit'
                 onClick={() => {onValidAttempt(); handleSubmit((onSubmit))();}} />
         </form>
+    )
+
+    return (
+        <>
+            {isLoading ? <Spinner /> : form}
+        </>
     )
 }

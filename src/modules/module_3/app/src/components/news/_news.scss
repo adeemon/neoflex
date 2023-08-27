@@ -1,5 +1,5 @@
-@import '../../../assets/styles/mixins';
-@import '../../../assets/styles//vars';
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles//vars";
 .news {
     @include flexCenter;
     flex-direction: column;
@@ -17,7 +17,7 @@
         padding: 8px;
         width: 64px;
         height: 64px;
-        border-radius: 50px;
+        border-radius: 50px !important;
         border: 1px solid $button-active-color;
         background: white;
         background-color: $button-active-color;
@@ -26,14 +26,14 @@
         }
         &:disabled {
             background-color: white;
-            ;
+            pointer-events: none;
             svg {
                 stroke: $black-letters-color;
             }
         }
         &:hover,
         &:focus {
-            border: 3px solid $link-hover-color
+            border: 3px solid $link-hover-color;
         }
     }
     &__articles-wrapper {

@@ -14,11 +14,7 @@ export const Accorderon: React.FC<IAccodeonProps> = ({summary, content}) => {
     const onClick = () => {
         setIsChecked(!isChecked);
     }
-
-    React.useEffect(()=> {
-        console.log(isChecked);
-    })
-
+    
     return (
         <div className='accordeon'>
             <div className="accordeon__summary-container" onClick={onClick}>
@@ -32,13 +28,7 @@ export const Accorderon: React.FC<IAccodeonProps> = ({summary, content}) => {
                 }
                 </div>
             </div>
-            {isChecked ? 
-                (<p className='accordeon__content'>
-                    {content}
-                </p>)
-                : ''
-            }
-            
+            {isChecked && (<p className='accordeon__content'>{content} </p>)}    
         </div>
     )
 }

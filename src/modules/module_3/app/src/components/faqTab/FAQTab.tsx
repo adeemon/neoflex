@@ -16,15 +16,15 @@ const usingInfo = {
     'What do I need to know about interest rates?': 'For each reporting period from the 7th day of the previous month to the 6th day of the current month inclusive, a statement is generated for the credit card. The statement contains information on the amount and timing of the minimum payment, as well as the total amount of debt as of the date of issue.',
 }
 
-const issuingInfoRender = Object.entries(issuingInfo).map((element)=> {
+const issuingInfoRender = Object.entries(issuingInfo).map((element, index)=> {
     return (
-        <Accorderon summary={element[0]} content={element[1]} />
+        <Accorderon summary={element[0]} content={element[1]} key={index} />
     )
 })
 
-const usingInfoRender = Object.entries(usingInfo).map((element)=> {
+const usingInfoRender = Object.entries(usingInfo).map((element, index)=> {
     return (
-        <Accorderon summary={element[0]} content={element[1]} />
+        <Accorderon summary={element[0]} content={element[1]} key={index} />
     )
 })
 

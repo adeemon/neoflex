@@ -25,12 +25,12 @@ export async function fetchCurrency(currency: String) {
     }
 }
 
-export async function postEmail(email: string) {
-    fetch('/email', {
+export async function postCustom(path: string, body: string) {
+    fetch(path, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(body)
     })
 }

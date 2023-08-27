@@ -1,5 +1,5 @@
-@import '../../../assets/styles/mixins';
-@import '../../../assets/styles//vars';
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/vars";
 .news-sub {
     @include flexCenter;
     flex-direction: column;
@@ -30,26 +30,26 @@
         border-radius: 20px;
         height: 70%;
         width: 100%;
-        background: #FFF;
-        box-shadow: 0px 10px 20px 0px rgba(54, 58, 120, 0.10);
+        background: #fff;
+        box-shadow: 0px 10px 20px 0px rgba(54, 58, 120, 0.1);
     }
     &__email-input {
         padding-left: 30px;
         width: 80%;
         border: none;
-        background-image: url('../assets/images/design/email 1.png');
+        background-image: url("../assets/images/design/email 1.png");
         background-repeat: no-repeat;
         background-size: contain;
         outline: none;
         background-color: transparent;
-        font-family: 'Nunito Sans';
+        font-family: "Nunito Sans";
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
         line-height: 147.4%;
-        color: #9092B0;
+        color: #9092b0;
         &::placeholder {
-            font-family: 'Nunito Sans';
+            font-family: "Nunito Sans";
             font-size: 20px;
             font-style: normal;
             font-weight: 400;
@@ -60,7 +60,7 @@
         padding: 15px;
         border-radius: 20px;
         border: none;
-        background: #686DF1;
+        background: #686df1;
         color: $white;
         font-size: 16px;
         font-style: normal;

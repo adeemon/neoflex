@@ -15,7 +15,7 @@ const infoToRender = Object.entries(info).map((element, index) => {
     const value = element[1];
     const isOdd: boolean = index % 2 == 1 ? true : false;
     return (
-        <InfoCardTitleDesc className='cashback-tab__card' title={value} description={name} isOdd={isOdd} />
+        <InfoCardTitleDesc className='cashback-tab__card' title={value} description={name} isOdd={isOdd} key={index} />
     )
 
 })

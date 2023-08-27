@@ -7,3 +7,12 @@
         width: 32%;
     }
 }
+
+@media screen and (max-width: $mobile) {
+    .cashback-tab {
+        flex-direction: column;
+        &__card {
+            width: 90%;
+        }
+    }
+}

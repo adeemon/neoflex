@@ -39,14 +39,14 @@ const content:Array<IInfoCardIconProps> = [
     },
 ]
 
-const cardsToRender = content.map((element) => {
+const cardsToRender = content.map((element, index) => {
     return (
         <>
             <InfoCardIcon isOdd={element.isOdd}
             title={element.title}
             description={element.description}
             IconComponent={element.IconComponent}
-            key={element.title}
+            key={index}
             />
         </>
     )

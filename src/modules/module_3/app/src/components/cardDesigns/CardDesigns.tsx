@@ -6,9 +6,9 @@ import fourCard from '../../assets/images/content/cards/cardImage4 1.svg';
 import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 
 const deisgnsArray: Array<string> = [firstCard, secondCard, thirdCard, fourCard];
-const disignsToRender = deisgnsArray.map((designPath) => {
+const disignsToRender = deisgnsArray.map((designPath, index) => {
     return (
-        <li className="card-designs__design-example" key={designPath}>
+        <li className="card-designs__design-example" key={index}>
             <ImageFigured className='card-designs__design-figure' src={designPath} />
         </li>
     )
