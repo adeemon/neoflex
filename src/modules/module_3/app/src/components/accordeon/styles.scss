@@ -7,21 +7,26 @@
         width: 100%;
         cursor: pointer;
     }
-    &__summary {
-        color: #1C1C1E;
+    &__summary-container {
+        border: none;
+        background-color: transparent;
+    }
+    &__summary,
+    &__summary-container {
+        color: #1c1c1e;
         font-size: 16px;
         font-family: "Ubuntu";
         font-weight: 500;
         line-height: 23.58px;
-        word-wrap: break-word
+        word-wrap: break-word;
     }
     &__content {
         margin-top: 56px;
-        color: #7B7454;
+        color: #7b7454;
         font-size: 16px;
         font-family: "Ubuntu";
         font-weight: 400;
         line-height: 23.58px;
-        word-wrap: break-word
+        word-wrap: break-word;
     }
 }

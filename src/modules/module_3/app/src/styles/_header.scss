@@ -114,6 +114,7 @@
         .header {
             &__nav {
                 display: flex;
+                visibility: visible;
                 height: auto;
                 width: 100vw;
                 position: absolute;

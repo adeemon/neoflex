@@ -1,9 +1,10 @@
-@import '../../../assets/styles/mixins';
-@import '../../../assets/styles//vars';
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles//vars";
 .main-navigation {
     @include flexCenter;
     flex-direction: row;
     gap: 20px;
+    z-index: 1000;
     &__element {
         width: auto;
     }
@@ -12,7 +13,7 @@
         color: inherit;
         &:hover,
         &:focus {
-            color: #B2A35F;
+            color: #b2a35f;
         }
     }
 }

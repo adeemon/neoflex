@@ -1,7 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
-import { Loan } from "./loan";
-import Root from "./root";
-import { Homepage } from "./homepage";
+import { createBrowserRouter } from 'react-router-dom';
+import { Loan } from './loan';
+import Root from './root';
+
 
 export const router = createBrowserRouter([{
     path: '/',
@@ -9,6 +9,6 @@ export const router = createBrowserRouter([{
   },
   {
     path: 'loan',
-    element: <Loan />
-  }
-])
+    element: <Loan />,
+  },
+]);

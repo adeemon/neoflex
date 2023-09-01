@@ -39,7 +39,7 @@
     }
     &__divider-assist {
         height: 50%;
-        content: "";
+        content: " ";
         &:nth-last-child(1) {
             border-top: solid 2px rgba(128, 128, 128, 0.2);
         }

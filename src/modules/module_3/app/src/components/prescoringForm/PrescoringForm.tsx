@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { useForm, Controller, SubmitHandler} from "react-hook-form"
-import { Input } from '../input/Input';
-import * as Yup from "yup";
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Label } from '../label/Label';
 import { string, InferType } from 'yup';
-import {format, subYears} from 'date-fns';
+import { format, subYears } from 'date-fns';
 import { Select } from '../select/Select';
 import { parseDateString } from '../../utils';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Slider } from '../ui-toolkit/slider/Slider';
 import { Spinner } from '../spinner/Spinner';
 import { postCustom } from '../../api';
+import { Input } from '../input/Input';
+import { Label } from '../label/Label';
 
+
+const postPath = 'http://localhost:8080/application';
 const formDataSchema = Yup.object({
     lastName: string().required('Enter your last name'),
     firstName: string().required('Enter your first name'),
@@ -21,14 +23,13 @@ const formDataSchema = Yup.object({
     birthdate: Yup.date()
     .transform(parseDateString)
     .required('Enter you birthday as dd.mm.yyyy')
-    .typeError("Please enter a valid date")
-    .max((format(subYears(new Date(),18), 'dd.MM.yyyy')), "Date is too early"),
-
+    .typeError('Please enter a valid date')
+    .max((format(subYears(new Date(), 18), 'dd.MM.yyyy')), 'Date is too early'),
     term: string().required(),
     passportNumber: Yup.number()
                     .required('Enter your password number')
-                    .min(100000,'The series must be 6 digits')
-                    .max(999999,'The series must be 6 digits'),
+                    .min(100000, 'The series must be 6 digits')
+                    .max(999999, 'The series must be 6 digits'),
     passportSeries: Yup.number()
                     .required('Enter your password series')
                     .min(1000, 'The series must be 4 digits')
@@ -37,48 +38,49 @@ const formDataSchema = Yup.object({
             .min(15000, 'Amount must be more than 15000')
             .max(600000, 'Amount must be less than 600000')
             .required('Enter an valid amount')
-            .typeError('Enter an valid amount  ')
-})
+            .typeError('Enter an valid amount'),
+});
 
-type TFormData = InferType<typeof formDataSchema>
+type TFormData = InferType<typeof formDataSchema>;
 
 export const PrescoringForm: React.FC = () => {
     const [isValidated, setIsValidated] = React.useState(false);
     const [amount, setAmount] = React.useState(1);
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const {handleSubmit, formState: { errors }, control} = useForm<TFormData>({
+    const { handleSubmit, control } = useForm<TFormData>({
         resolver: yupResolver(formDataSchema),
         defaultValues: {
             middleName: '',
-            term:'6 month',
-            amount: 15000
+            term: '6',
+            amount: 15000,
         },
-        mode:'onSubmit',
-        reValidateMode:'onChange',
-        shouldFocusError: true
+        mode: 'onSubmit',
+        reValidateMode: 'onChange',
+        shouldFocusError: true,
     });
-
-    const onSubmit: SubmitHandler<TFormData> = (data) => {
-        console.log(data);
-        console.log('data')
-        imitateLoading();
-        setAmount(data.amount);
-        postCustom('/application', JSON.stringify(data))
-    }
-
-    const onValidAttempt = () => {
-        setIsValidated(true);
-        
-    }
 
     const imitateLoading = () => {
         setIsLoading(true);
-        setTimeout(()=> setIsLoading(false), 10000);
-    }
+        setTimeout(() => setIsLoading(false), 10000);
+    };
+
+    const onSubmit: SubmitHandler<TFormData> = (data) => {
+        const output = data;
+        output.term = (output.term.replace(/\D{1,}/, ''));
+        console.log(data);
+        console.log('data');
+        imitateLoading();
+        setAmount(data.amount);
+        postCustom(postPath, output);
+    };
+
+    const onValidAttempt = () => {
+        setIsValidated(true);
+    };
 
     const form = (
-        <form className='prescoring-form' onSubmit={handleSubmit(onSubmit)} id='prescoring-form'>
+        <form className="prescoring-form" onSubmit={handleSubmit(onSubmit)} id="prescoring-form">
             <div className="prescoring-form__customize-card">
                 <div className="prescoring-form__amount">
                     <p className="prescoring-form__title">
@@ -91,16 +93,18 @@ export const PrescoringForm: React.FC = () => {
                         <p className="prescoring-form__step">
                             Select amount
                         </p>
-                        <Controller 
-                            name='amount'
-                            control={control}
+                        <Controller
+                            name="amount"
+                            control={ control }
                             render={
-                                ({field, fieldState: {invalid, error}}) =>
+                                ({ field, fieldState: { error } }) => (
                                 <Input
-                                    type='number'
+                                    type="number"
                                     errorMessage={error?.message}
-                                    className='prescoring-form__amount-content'
-                                    {...field} />
+                                    className="prescoring-form__amount-content"
+                                    {...field}
+                                />
+                                )
                             }
                         />
                         <Slider min={15000} max={600000} current={amount} />
@@ -122,147 +126,170 @@ export const PrescoringForm: React.FC = () => {
                 </p>
                 <div className="prescoring-form__inputs-wrapper">
                     <div className="prescoring-form__input-container">
-                    <Label title='Your last name 'elementId='lastName' isRequired={true} />
-                    <Controller 
-                            name='lastName'
-                            control={control}
-                            render={({field, fieldState: {
-                                invalid,
-                                error
-                            }})=> <Input 
-                            placeholder='For Example Doe'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                        <Label title="Your last name" elementId="lastName" isRequired />
+                        <Controller
+                                name="lastName"
+                                control={ control }
+                                render={({ field, fieldState: {
+                                    invalid,
+                                    error,
+                                } }) => (
+                                    <Input
+                                    placeholder="For Example Doe"
+                                    errorMessage={error?.message}
+                                    isInvalid={invalid}
+                                    isValidated={isValidated}
+                                    {...field}
+                                    />
+                                )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your first name 'elementId='firstName' isRequired={true} />
-                        <Controller 
-                            name='firstName'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your first name" elementId="firstName" isRequired />
+                        <Controller
+                            name="firstName"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input
-                            placeholder='For Example Jhon'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                placeholder="For Example Jhon"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your patronymic 'elementId='middleName' isRequired={false} />
-                        <Controller 
-                            name='middleName'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your patronymic" elementId="middleName" />
+                        <Controller
+                            name="middleName"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input
-                            placeholder='For Example Victorovich'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                placeholder="For Example Victorovich"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Select term 'elementId='term' isRequired={true} />
-                        <Controller 
-                            name='term'
-                            control={control}
-                            render={({field, fieldState: {
-                                invalid,
-                                error
-                            }})=> <Select
-                            values={['6 month', '12 month', '18 month', '24 month',]}
-                            errorMessage={error?.message}
-                            {...field} />}
+                        <Label title="Select term" elementId="term" isRequired />
+                        <Controller
+                            name="term"
+                            control={ control }
+                            render={({ field, fieldState: {
+                                error,
+                            } }) => (
+                                <Select
+                                values={['6 month', '12 month', '18 month', '24 month']}
+                                errorMessage={error?.message}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your email 'elementId='email' isRequired={false} />
-                        <Controller 
-                            name='email'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your email" elementId="email" />
+                        <Controller
+                            name="email"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input
-                            placeholder='test@gmail.com'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                placeholder="test@gmail.com"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your date of birth 'elementId='birthdate' isRequired={true} />
-                        <Controller 
-                            name='birthdate'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your date of birth" elementId="birthdate" isRequired />
+                        <Controller
+                            name="birthdate"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input    
-                            placeholder='Select date and Time'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                placeholder="Select date and Time"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your passport series 'elementId='passportSeries' isRequired={true} />
-                        <Controller 
-                            name='passportSeries'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your passport series" elementId="passportSeries" isRequired />
+                        <Controller
+                            name="passportSeries"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input
-                            type='number'
-                            placeholder='0000'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                type="number"
+                                placeholder="0000"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
                     <div className="prescoring-form__input-container">
-                        <Label title='Your passport number 'elementId='passportNumber' isRequired={true} />
-                        <Controller 
-                            name='passportNumber'
-                            control={control}
-                            render={({field, fieldState: {
+                        <Label title="Your passport number" elementId="passportNumber" isRequired />
+                        <Controller
+                            name="passportNumber"
+                            control={ control }
+                            render={({ field, fieldState: {
                                 invalid,
-                                error
-                            }})=> <Input
-                            type='number'
-                            placeholder='000000'
-                            errorMessage={error?.message}
-                            isInvalid={invalid}
-                            isValidated={isValidated}
-                            {...field} />}
+                                error,
+                            } }) => (
+                                <Input
+                                type="number"
+                                placeholder="000000"
+                                errorMessage={error?.message}
+                                isInvalid={invalid}
+                                isValidated={isValidated}
+                                {...field}
+                                />
+                            )}
                         />
                     </div>
-                   
                 </div>
             </div>
-            <ButtonMain 
-                label='Continue' 
-                className='prescoring-form__submit'
-                formAction='submit'
-                onClick={() => {onValidAttempt(); handleSubmit((onSubmit))();}} />
+            <ButtonMain
+                label="Continue"
+                className="prescoring-form__submit"
+                formAction="submit"
+                onClick={ () => { onValidAttempt(); handleSubmit((onSubmit))(); } }
+            />
         </form>
-    )
+    );
 
     return (
         <>
             {isLoading ? <Spinner /> : form}
         </>
-    )
-}
+    );
+};

@@ -47,7 +47,6 @@
       // ### imports
       
       "import/no-named-as-default": "off",
-      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md,
       "import/prefer-default-export": "off",
       "import/no-default-export": "off",
       // https://eslint.org/docs/latest/rules/no-duplicate-imports
@@ -64,8 +63,7 @@
         {
           "commonjs": true,
           "ignore": [
-            "\\.svg",
-            "^@persoproduct-destroy/"
+            "\\.svg"
           ]
         }
       ],
@@ -105,54 +103,7 @@
         }
       ],
       // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
-      "import/order": [
-        "warn",
-        {
-          "groups": [
-            "builtin",
-            "external",
-            "internal",
-            [
-              "sibling",
-              "parent"
-            ],
-            "index",
-            "object",
-            "type"
-          ],
-          "pathGroups": [
-            {
-              "pattern": "@persoproduct-destroy/**",
-              "group": "internal"
-            }
-          ],
-          "newlines-between": "always",
-          "warnOnUnassignedImports": true
-        }
-      ],
-      // https://eslint.org/docs/latest/rules/sort-imports
-      //    "sort-imports": [
-      //      1,
-      //      {
-      //        "ignoreCase": false,
-      //        "ignoreDeclarationSort": true,
-      //        "ignoreMemberSort": true,
-      //        "memberSyntaxSortOrder": [
-      //          "none",
-      //          "all",
-      //          "multiple",
-      //          "single"
-      //        ],
-      //        "allowSeparatedGroups": false
-      //      }
-      //    ],
-      
-      
-      // ### react
-      
-      // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md
       "react/react-in-jsx-scope": "off",
-      // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
       "react/function-component-definition": [
         "error",
         {
@@ -190,13 +141,6 @@
       // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-one-expression-per-line.md
       "react/jsx-one-expression-per-line": "off",
       // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
-      "react/require-default-props": [
-        "warn",
-        {
-          "forbidDefaultForRequired": true,
-          "functions": "ignore"
-        }
-      ],
       // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
       "react/jsx-props-no-spreading": [
         "warn",
@@ -230,20 +174,6 @@
         }
       ],
       // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md
-      "react/jsx-sort-props": [
-        "warn",
-        {
-          "callbacksLast": true,
-          "shorthandFirst": true,
-          "multiline": "last",
-          "ignoreCase": true,
-          "reservedFirst": [
-            "key",
-            "ref"
-          ],
-          "noSortAlphabetically": true
-        }
-      ],
       // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-useless-fragment.md
       "react/jsx-no-useless-fragment": [
         "error",
@@ -348,6 +278,16 @@
           "treatUndefinedAsUnspecified": true
         }
       ],
+      "jsx-a11y/label-has-associated-control": ["error", {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }],
+      "jsx-a11y/label-has-for": ["error", {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }],
       // https://eslint.org/docs/latest/rules/no-multiple-empty-lines
       "no-multiple-empty-lines": [
         "warn",
@@ -389,11 +329,6 @@
             "multiline": true,
             "consistent": true
           },
-          //        "ImportDeclaration": {
-          //          "minProperties": 4,
-          //          "multiline": true,
-          //          "consistent": true
-          //        },
           "ExportDeclaration": {
             "minProperties": 4,
             "multiline": true,

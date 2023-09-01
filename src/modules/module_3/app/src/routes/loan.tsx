@@ -9,37 +9,36 @@ import { FAQTab } from '../components/faqTab/FAQTab';
 import { HowToGetCardInfo } from '../components/howToGetCardInfo/HowToGetCardInfo';
 import { PrescoringForm } from '../components/prescoringForm/PrescoringForm';
 
+
 const tabsArray:Array<ITabsPair> = [
-  { 
-    name:'About card',
-    component: <AboutCardTab />
+  {
+    name: 'About card',
+    component: <AboutCardTab />,
   },
   {
     name: 'Rates and conditions',
-    component: <RatesConditionsTab />
+    component: <RatesConditionsTab />,
   },
   {
     name: 'Cashback',
-    component: <CashbackTab />
+    component: <CashbackTab />,
   },
   {
     name: 'FAQ',
-    component: <FAQTab />
+    component: <FAQTab />,
   },
-]
+];
 
 
-export const Loan: React.FC = () => {
-  return (
-    <>
-        <Header />
-        <main>
-            <PlatinumCardAdv /> 
-            <TabsManager tabsArray={tabsArray}/> 
-            <HowToGetCardInfo />
-            <PrescoringForm />
-        </main>
-        <Footer />
-    </>
-  );
-}
+export const Loan: React.FC = () => (
+  <>
+    <Header />
+    <main>
+        <PlatinumCardAdv />
+        <TabsManager tabsArray={tabsArray} />
+        <HowToGetCardInfo />
+        <PrescoringForm />
+    </main>
+    <Footer />
+  </>
+);

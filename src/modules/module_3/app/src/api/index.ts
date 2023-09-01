@@ -5,32 +5,31 @@ export async function fetchNews() {
     return result;
 }
 
-export async function fetchCurrency(currency: String) {
+export async function fetchCurrency(currency: string) {
     const fetchUrl = `https://currency-exchange.p.rapidapi.com/exchange?from=${currency}&to=RUB&q=1.0`;
     const options = {
         method: 'GET',
         headers: {
             'X-RapidAPI-Key': '83343411bamsh20e96942442fe55p12dda9jsnb29f2c91d316',
-            'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com'
-        }
+            'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com',
+        },
     };
     try {
         let result = await fetch(fetchUrl, options);
         let message = await result.text();
         let newValue = Number(message).toFixed(2);
         return newValue;
-
     } catch {
-        console.error('Ошибка в получении данных с сервера обмена валют')
+        console.error('Ошибка в получении данных с сервера обмена валют');
     }
 }
 
-export async function postCustom(path: string, body: string) {
+export async function postCustom(path: string, body: object) {
     fetch(path, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
-    })
+        body: JSON.stringify(body),
+    });
 }

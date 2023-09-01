@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import CardDesigns from '../components/cardDesigns/CardDesigns';
@@ -9,22 +10,20 @@ import { NewsSub } from '../components/newsSub/NewsSub';
 import { Support } from '../components/support/Support';
 
 
-function App() {
-  return (
-        <>
-            <Header />
-            <main>
-                <CardDesigns />
-                <Features />
-                <Exchange />
-                <GlobalMap />
-                <News />
-                <Support />
-                <NewsSub />
-            </main>
-            <Footer />
-        </>
-  );
-}
+const App: React.FC = () => (
+  <>
+      <Header />
+      <main>
+          <CardDesigns />
+          <Features />
+          <Exchange />
+          <GlobalMap />
+          <News />
+          <Support />
+          <NewsSub />
+      </main>
+      <Footer />
+  </>
+);
 
 export default App;
