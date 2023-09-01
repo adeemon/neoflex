@@ -9,7 +9,7 @@ export interface IInfoCardTitleDescProps {
 }
 
 export const InfoCardTitleDesc: React.FC<IInfoCardTitleDescProps> = ({ isOdd, title, description, className }) => (
-    <div 
+    <div
     className={`infoCardTitleDesc ${isOdd ? 'infoCardTitleDesc-gray'
     : 'infoCardTitleDesc-bone'} ${className || ''}`}
     >
