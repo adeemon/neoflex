@@ -1,0 +1,129 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles//vars";
+.header {
+    @include blocksPadding;
+    width: 100%;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__company-name {
+        color: $company-name-color;
+        font-size: 24px;
+    }
+    // .header__nav
+    &__nav {
+        width: auto;
+        gap: 10px;
+        color: $black-letters-color;
+    }
+    // .header__lk-button
+    &__lk-button {
+        height: 50px;
+        border-radius: 16px;
+        @include defaultButton;
+    }
+    &__checkbox-label {
+        display: none;
+    }
+}
+
+.menu-btn {
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.menu-btn>span,
+.menu-btn>span::before,
+.menu-btn>span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #616161;
+    transition-duration: 0.25s;
+}
+
+.menu-btn>span::before {
+    content: "";
+    top: -8px;
+}
+
+.menu-btn>span::after {
+    content: "";
+    top: 8px;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked~.menu-btn>span {
+    transform: rotate(45deg);
+}
+
+#menu-toggle:checked~.menu-btn>span::before {
+    top: 0;
+    transform: rotate(0);
+}
+
+#menu-toggle:checked~.menu-btn>span::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+
+#menu-toggle:checked~.menubox {
+    visibility: visible;
+    left: 0;
+}
+
+@media screen and (max-width: $tablet) {
+    .header {
+        gap: auto;
+        justify-content: flex-end;
+        &__checkbox-label {
+            display: block;
+        }
+        &__nav {
+            display: none;
+            visibility: hidden;
+        }
+        &__company-name {
+            margin-right: auto;
+        }
+        &__lk-button {
+            display: none !important;
+        }
+        &__checkbox-label {
+            background-color: $button-active-color;
+            border-radius: 10px;
+        }
+    }
+    .menu-btn {
+        display: flex;
+        z-index: 1001;
+    }
+    #menu-toggle:checked~ {
+        .header {
+            &__nav {
+                display: flex;
+                visibility: visible;
+                height: auto;
+                width: 100vw;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: $main-backgroud-color;
+                z-index: 1000;
+                padding: 20px;
+            }
+        }
+    }
+}
