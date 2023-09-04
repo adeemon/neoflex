@@ -1,0 +1,18 @@
+.cashback-tab {
+    @include flexCenter;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__card {
+        margin-bottom: 40px;
+        width: 32%;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .cashback-tab {
+        flex-direction: column;
+        &__card {
+            width: 90%;
+        }
+    }
+}

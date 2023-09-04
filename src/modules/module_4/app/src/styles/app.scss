@@ -1,0 +1,58 @@
+/* By Athlon Front-End Team */
+
+
+/* Core variables */
+
+@import "../assets/styles/vars";
+
+/* CSS Reset */
+
+@import "../assets/styles/reset";
+
+/* Fonts */
+
+@import "../styles/fonts";
+
+/* Mixins, helpers and functions */
+
+@import "../assets/styles/mixins";
+
+/* Vendor */
+
+
+/* Components */
+
+@import "../styles/body";
+@import "../styles/header";
+@import "../styles/footer";
+@import "../components/cardDesigns/styles.scss";
+@import "../components/features/styles.scss";
+@import "../styles/main";
+@import "../components/exchange/styles.scss";
+@import "../components/globalMap/styles.scss";
+@import "../components/support/styles.scss";
+@import "../components/newsSub/styles.scss";
+@import "../styles/main-navigation";
+@import "../styles/sub-button";
+@import "../components/news/news-article.scss";
+@import "../components/news/news.scss";
+@import "../components/platinumCardAdv/styles.scss";
+@import "../components/infoCardIcon/styles.scss";
+@import "../components/aboutCardTab/styles.scss";
+@import "../components/ratesConditionsTab/styles.scss";
+@import "../components/infoCardTitleDesc/styles.scss";
+@import "../components/cashbackTab/styles.scss";
+@import "../components/faqTab/styles.scss";
+@import "../components/accordeon/styles.scss";
+@import "../components/tabsManager/styles.scss";
+@import "../components/ui-toolkit/buttonMain/styles.scss";
+@import "../components/howToGetCardInfo/styles.scss";
+@import "../components/tooltipDivided/styles.scss";
+@import "../components/prescoringForm/styles.scss";
+@import "../components/input/styles.scss";
+@import "../components/label/styles.scss";
+@import "../components/ui-toolkit/inputFieldIcon/styles.scss";
+@import "../components/select/styles.scss";
+@import "../components/ui-toolkit/slider/styles.scss";
+@import "../components/spinner/styles.scss";
+@import "../components/error404/styles.scss";

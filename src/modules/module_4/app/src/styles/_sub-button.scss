@@ -1,0 +1,27 @@
+@import '../../../assets/styles/mixins';
+@import '../../../assets/styles//vars';
+.sub-button {
+    @include flexCenter;
+    flex-direction: row;
+    width: auto;
+    height: 60px;
+    &__icon {
+        @include flexCenter;
+        margin-top: -6px;
+    }
+}
+
+@media (max-width: $tablet) {
+    .sub-button {
+        width: 60px;
+        &__content {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .sub-button {
+        padding: 5px;
+    }
+}

@@ -1,0 +1,13 @@
+@import '../../../assets/styles/mixins';
+@import '../../../assets/styles//vars';
+.support {
+    @include flexCenter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 147.4%;
+    letter-spacing: 0.48px;
+    &__link {
+        color: $orange;
+    }
+}

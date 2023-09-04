@@ -1,0 +1,27 @@
+.get-info {
+    @include flexCenter;
+    flex-direction: column;
+    &__title {
+        color: #000;
+        text-align: center;
+        font-family: "Ubuntu";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 147.4%;
+    }
+    &__toltips-container {
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .get-info {
+        &__toltips-container {
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+}
