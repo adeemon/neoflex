@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 //  import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store/store';
-import { IOffer } from '../../interfaces/index';
+import { IloanOffer } from '../../interfaces/index';
 import { getApllicationListFromString } from '../../utils';
 
 interface IUserStorage {
   isSubscribed: boolean;
   applicationsList: number[];
-  offersList?: IOffer[];
+  offersList?: IloanOffer[];
 }
 
 const initialState: IUserStorage = {
