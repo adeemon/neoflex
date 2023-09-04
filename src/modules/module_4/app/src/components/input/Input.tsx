@@ -26,29 +26,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
   errorMessage,
   className,
   onChange,
-}, ref) => (
-  <div className="input__container" ref={ ref }>
-    { label && <label className="input__label" htmlFor={ name }>{ label }</label> }
-    <div className={`input__field-container ${isInvalid ? 'invalid' : 'valid'}`}>
+}, ref) =>
+  (
+    <div className="input__container" ref={ ref }>
+      { label && <label className="input__label" htmlFor={ name }>{ label }</label> }
+      <div className={ `input__field-container ${isInvalid ? 'invalid' : 'valid'}` }>
         <input
-        className={`${className || ''} input__field`}
-        ref={ ref }
-        id={ name }
-        name={ name }
-        placeholder={ placeholder }
-        type={ type }
-        value={ value?.toString().trim() }
-        onChange={ (e) => onChange(e.target.value) }
+          className={ `${className || ''} input__field` }
+          ref={ ref }
+          id={ name }
+          name={ name }
+          placeholder={ placeholder }
+          type={ type }
+          value={ value?.toString().trim() }
+          onChange={ (e) =>
+            onChange(e.target.value) }
         />
-        <InputFieldIcon isInvalid={isInvalid} isValidated={isValidated} />
-    </div>
-    { errorMessage && (
-      <div className="input__error-message">
-        { errorMessage }
+        <InputFieldIcon isInvalid={ isInvalid } isValidated={ isValidated } />
       </div>
-    ) }
-  </div>
-));
+      { errorMessage && (
+        <div className="input__error-message" ref={ ref }>
+          { errorMessage }
+        </div>
+      ) }
+    </div>
+  ));
 
 Input.defaultProps = {
   label: undefined,

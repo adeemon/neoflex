@@ -10,7 +10,7 @@ import { HowToGetCardInfo } from '../components/howToGetCardInfo/HowToGetCardInf
 import { PrescoringForm } from '../components/prescoringForm/PrescoringForm';
 
 
-const tabsArray:Array<ITabsPair> = [
+const tabsArray: ITabsPair[] = [
   {
     name: 'About card',
     component: <AboutCardTab />,
@@ -30,15 +30,16 @@ const tabsArray:Array<ITabsPair> = [
 ];
 
 
-export const Loan: React.FC = () => (
-  <>
-    <Header />
-    <main>
+export const Loan: React.FC = () =>
+  (
+    <>
+      <Header />
+      <main>
         <PlatinumCardAdv />
-        <TabsManager tabsArray={tabsArray} />
+        <TabsManager tabsArray={ tabsArray } />
         <HowToGetCardInfo />
         <PrescoringForm />
-    </main>
-    <Footer />
-  </>
-);
+      </main>
+      <Footer />
+    </>
+  );

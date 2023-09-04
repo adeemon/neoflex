@@ -12,7 +12,7 @@
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json",
+    "project": "tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -23,7 +23,7 @@
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/resolver": {
       "typescript": {
-        "project": "./tsconfig.json"
+        "project": "tsconfig.json"
       }
     },
     "import/parsers": {
@@ -39,6 +39,7 @@
     "import/no-named-as-default": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export": "off",
+    "import/no-cycle": "off",
     // https://eslint.org/docs/latest/rules/no-duplicate-imports
     "no-duplicate-imports": "warn",
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/exports-last.md
@@ -79,7 +80,7 @@
     "import/newline-after-import": [
       "error",
       {
-        "count": 2
+        "count": 1
       }
     ],
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/max-dependencies.md
@@ -218,6 +219,7 @@
     "linebreak-style": ["error", "unix"],
     // https://eslint.org/docs/latest/rules/no-debugger
     "no-debugger": "warn",
+    "implicit-arrow-linebreak": ["error", "below"],
     // https://eslint.org/docs/latest/rules/no-console
     "no-console": [
       "warn",

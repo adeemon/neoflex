@@ -4,10 +4,13 @@ import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 
 
-export const PageNotFound: React.FC = () => (
+export const PageNotFound: React.FC = () =>
+  (
     <>
-        <Header />
+      <Header />
+      <main>
         <Error404 />
-        <Footer />
+      </main>
+      <Footer />
     </>
-);
+  );

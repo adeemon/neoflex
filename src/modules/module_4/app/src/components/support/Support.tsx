@@ -1,10 +1,11 @@
 import * as React from 'react';
 
 
-export const Support:React.FC = () => (
+export const Support: React.FC = () =>
+  (
     <section className="support">
-        <a href="/" className="support__link">
-            Support
-        </a>
+      <a href="/" className="support__link">
+        Support
+      </a>
     </section>
-);
+  );

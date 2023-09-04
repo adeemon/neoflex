@@ -3,16 +3,21 @@ import ReactDOM from 'react-dom/client';
 import {
   RouterProvider,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { router } from './routes/router';
 import './styles/app.scss';
 import reportWebVitals from './reportWebVitals';
 
 
+import { store } from './redux/store/store';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={ store }>
+      <RouterProvider router={ router } />
+    </Provider>
   </React.StrictMode>,
 );
 

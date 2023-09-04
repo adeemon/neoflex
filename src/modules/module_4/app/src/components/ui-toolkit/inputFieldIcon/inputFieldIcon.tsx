@@ -4,17 +4,18 @@ import { ReactComponent as IncorrectIcon } from '../../../assets/images/design/C
 
 
 export interface IInputFieldIconProps {
-    isValidated?: boolean;
-    isInvalid?: boolean;
+  isValidated?: boolean;
+  isInvalid?: boolean;
 }
 
-export const InputFieldIcon: React.FC<IInputFieldIconProps> = ({ isValidated, isInvalid }) => (
+export const InputFieldIcon: React.FC<IInputFieldIconProps> = ({ isValidated, isInvalid }) =>
+  (
     <>
-        {isValidated ? (
-            <div className={`input-icon ${isValidated ? 'visible' : 'hidden'}`}>
-                {!isInvalid ? <CorrectIcon /> : <IncorrectIcon />}
-            </div>
-        )
-        : ''}
+      { isValidated ? (
+        <div className={ `input-icon ${isValidated ? 'visible' : 'hidden'}` }>
+          { !isInvalid ? <CorrectIcon /> : <IncorrectIcon /> }
+        </div>
+      )
+        : '' }
     </>
-);
+  );
