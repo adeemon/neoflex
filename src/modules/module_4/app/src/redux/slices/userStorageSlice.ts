@@ -1,18 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //  import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store/store';
-import { IloanOffer } from '../../interfaces/index';
-import { getApllicationListFromString } from '../../utils';
+import { IloanOffer, ELoanSteps } from '../../interfaces/index';
 
 interface IUserStorage {
   isSubscribed: boolean;
+  currentApplication: number | null;
   applicationsList: number[];
-  offersList?: IloanOffer[];
+  offersList: IloanOffer[];
+  status: ELoanSteps;
 }
 
 const initialState: IUserStorage = {
   isSubscribed: false,
-  applicationsList: [1],
+  currentApplication: null,
+  applicationsList: [],
+  offersList: [],
+  status: ELoanSteps.Prescoring,
 };
 
 const userStoragSlice = createSlice({
@@ -20,21 +25,49 @@ const userStoragSlice = createSlice({
   initialState,
   reducers: {
     getStateFromStorage: (state) => {
-      state.isSubscribed = localStorage.getItem('isSubscribed') === 'true';
-      const applicationsList = localStorage.getItem('applicationsList') || '';
-      state.applicationsList = getApllicationListFromString(applicationsList);
+      const localSAppId = localStorage.getItem('applicationId');
+      const localSLoanOffers = localStorage.getItem('loanOffers');
+      if (localSAppId) {
+        state.currentApplication = Number.parseInt(localSAppId, 10);
+      }
+      if (localSLoanOffers) {
+        const offers = JSON.parse(localSLoanOffers) as IloanOffer[];
+        state.offersList = offers;
+      }
     },
     subscribeUser: (state) => {
       state.isSubscribed = true;
       localStorage.setItem('isSubscribed', 'true');
-      console.log('im in action');
+    },
+    putApplicationId: (state, action: PayloadAction<number>) => {
+      state.currentApplication = action.payload;
+    },
+    pushOffer: (state, action: PayloadAction<IloanOffer>) => {
+      state.offersList.push(action.payload);
+    },
+    closeApplication: (state) => {
+      if (state.currentApplication) {
+        state.applicationsList.push(state.currentApplication);
+      }
+      state.currentApplication = null;
+      state.offersList = [];
     },
   },
 });
 
+export const selectCurrentOffers = (state: RootState) =>
+  state.userStorage.offersList;
 export const selectIsSubscribed = (state: RootState) =>
   state.userStorage.isSubscribed;
 
-export const { getStateFromStorage, subscribeUser } = userStoragSlice.actions;
+export const selectCurrentApplicationId = (state: RootState) =>
+  state.userStorage.currentApplication;
+
+export const {
+  getStateFromStorage,
+  subscribeUser,
+  putApplicationId,
+  pushOffer,
+} = userStoragSlice.actions;
 
 export default userStoragSlice.reducer;

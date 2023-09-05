@@ -12,6 +12,8 @@ import { Spinner } from '../spinner/Spinner';
 import { postCustom } from '../../api';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
+import { useAppDispatch } from '../../redux/store/store';
+import { getLoansByPrescoring } from '../../redux/slices/prescoringFormSlice';
 
 
 const postPath = 'http://localhost:8080/application';
@@ -41,19 +43,26 @@ const formDataSchema = Yup.object({
     .typeError('Enter an valid amount'),
 });
 
-type TFormData = InferType<typeof formDataSchema>;
+export type TPrescoringFormData = InferType<typeof formDataSchema>;
 
 export const PrescoringForm: React.FC = () => {
   const [isValidated, setIsValidated] = React.useState(false);
   const [amount, setAmount] = React.useState(1);
   const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useAppDispatch();
 
-  const { handleSubmit, control } = useForm<TFormData>({
+  const { handleSubmit, control } = useForm<TPrescoringFormData>({
     resolver: yupResolver(formDataSchema),
     defaultValues: {
-      middleName: '',
+      lastName: 'Ilya',
+      firstName: 'Ustimov',
+      middleName: 'Abs',
       term: '6',
-      amount: 15000,
+      amount: 50000,
+      email: 'aa8714193@mail.ru',
+      birthdate: new Date('02.08.1998'),
+      passportNumber: 111111,
+      passportSeries: 1111,
     },
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -66,11 +75,12 @@ export const PrescoringForm: React.FC = () => {
       setIsLoading(false), 10000);
   };
 
-  const onSubmit: SubmitHandler<TFormData> = (data) => {
+  const onSubmit: SubmitHandler<TPrescoringFormData> = (data) => {
     const output = data;
     output.term = (output.term.replace(/\D{1,}/, ''));
     console.log(data);
     console.log('data');
+    dispatch(getLoansByPrescoring(data));
     imitateLoading();
     setAmount(data.amount);
     postCustom(postPath, output);

@@ -1,4 +1,5 @@
 import { parse } from 'date-fns';
+import { IloanOffer } from '../interfaces';
 
 
 export function flilterText(inputText: string) {
@@ -30,4 +31,14 @@ export const getApllicationListFromString = (applicationsString: string) => {
   const numbered = splited.map((element) =>
     Number.parseInt(element, 10));
   return numbered;
+};
+
+export const compareTwoLoanOffers = (firstOffer: IloanOffer, secondOffer: IloanOffer) => {
+  const firstOverget = firstOffer.totalAmount - firstOffer.requestedAmount;
+  const secondOverget = secondOffer.totalAmount - secondOffer.requestedAmount;
+  const firstTotalPayed = firstOffer.term * firstOffer.monthlyPayment;
+  const secondTotalPayed = secondOffer.term * secondOffer.monthlyPayment;
+  const firstOverpay = firstTotalPayed - firstOverget - firstOffer.totalAmount;
+  const secondOverpay = secondTotalPayed - secondOverget - secondOffer.totalAmount;
+  return firstOverpay - secondOverpay;
 };
