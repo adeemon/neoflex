@@ -1,4 +1,3 @@
-import { IloanOffer } from './../../interfaces/index';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IloanOffer } from '../../interfaces/index';
 import { TPrescoringFormData } from '../../components/prescoringForm/PrescoringForm';
@@ -76,8 +75,8 @@ const loanOffersSlice = createSlice({
   },
 });
 
-export const selectPrescoringLoansArray = (state: RootState) =>
-  state.prescoringForm.response;
-export const selectPrescoringFormStatus = (state: RootState) =>
-  state.prescoringForm.status;
+export const selectLoanOffersArray = (state: RootState) =>
+  state.loanOffers.response;
+export const selectLoanStatus = (state: RootState) =>
+  state.loanOffers.status;
 export default loanOffersSlice.reducer;
