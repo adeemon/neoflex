@@ -13,7 +13,7 @@ import { postCustom } from '../../api';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
 import { useAppDispatch } from '../../redux/store/store';
-import { getLoansByPrescoring } from '../../redux/slices/prescoringFormSlice';
+import { getLoansByPrescoring } from '../../redux/slices/loanOffersSlice';
 
 
 const postPath = 'http://localhost:8080/application';

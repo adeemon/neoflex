@@ -11,6 +11,7 @@ export interface IloanOffer {
 
 export enum ELoanSteps {
   'Prescoring',
+  'GotPrescoring',
   'LoanOffers',
   'LoanChoosed',
 }

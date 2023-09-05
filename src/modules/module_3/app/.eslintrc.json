@@ -233,10 +233,6 @@
       // https://eslint.org/docs/latest/rules/eol-last
       "eol-last": "warn",
       // https://eslint.org/docs/latest/rules/linebreak-style
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
       // https://eslint.org/docs/latest/rules/no-debugger
       "no-debugger": "warn",
       // https://eslint.org/docs/latest/rules/no-console
