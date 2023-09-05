@@ -1,8 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import Footer from '../layout/Footer';
-import Header from '../layout/Header';
 import { PlatinumCardAdv } from '../components/platinumCardAdv/platinumCardAdv';
 import { ITabsPair, TabsManager } from '../components/tabsManager/TabsManager';
 import { AboutCardTab } from '../components/aboutCardTab/AboutCardTab';
@@ -11,8 +9,6 @@ import { RatesConditionsTab } from '../components/ratesConditionsTab/RatesCondit
 import { FAQTab } from '../components/faqTab/FAQTab';
 import { HowToGetCardInfo } from '../components/howToGetCardInfo/HowToGetCardInfo';
 import { selectIsAppLoaded } from '../redux/selectors/selectors';
-import { useAppDispatch } from '../redux/store/store';
-import { getStateFromStorage } from '../redux/slices/userStorageSlice';
 
 const tabsArray: ITabsPair[] = [
   {
@@ -35,28 +31,20 @@ const tabsArray: ITabsPair[] = [
 
 
 export const Loan: React.FC = () => {
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-    dispatch(getStateFromStorage());
-  }, []);
   const isLoansReady = useSelector(selectIsAppLoaded);
   const navigate = useNavigate();
   useEffect(() => {
     console.log(isLoansReady);
-    if (false) {
+    if (isLoansReady) {
       navigate('/loan/loanOffers');
-    } //  else navigate('prescoring');
+    } else navigate('prescoring');
   }, [isLoansReady]);
   return (
     <>
-      <Header />
-      <main>
-        <PlatinumCardAdv />
-        <TabsManager tabsArray={tabsArray} />
-        <HowToGetCardInfo />
-        <Outlet />
-      </main>
-      <Footer />
+      <PlatinumCardAdv />
+      <TabsManager tabsArray={tabsArray} />
+      <HowToGetCardInfo />
+      <Outlet />
     </>
   );
 };

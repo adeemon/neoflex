@@ -29,7 +29,6 @@ export const LoanOffer: React.FC<IloanOffer> = ({
       isSalaryClient,
     });
   };
-
   return (
     <div className="loanOffer">
       <ImageFigured src={ surpriseImage } alt="offer icon" />

@@ -1,52 +1,31 @@
+import { IloanOffer } from './../../interfaces/index';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IloanOffer } from '../../interfaces/index';
 import { TPrescoringFormData } from '../../components/prescoringForm/PrescoringForm';
 import { RootState } from '../store/store';
 
 interface IPrescoringForm {
-  data: TPurePresconingData;
+  choosedOffer: IloanOffer | null;
   status: 'Loading' | 'Ready' | 'Got responce';
   response: IloanOffer[] | null;
 }
 
-interface TPurePresconingData {
-  lastName: string;
-  firstName: string;
-  middleName: string | null | undefined;
-  email: string;
-  birthdate: string;
-  term: string;
-  passportNumber: number;
-  passportSeries: number;
-  amount: number;
-}
-
 const initialState: IPrescoringForm = {
-  data: {
-    lastName: '',
-    firstName: '',
-    middleName: '',
-    email: '',
-    birthdate: '2023-09-05',
-    term: '',
-    passportNumber: 1111,
-    passportSeries: 111111,
-    amount: 200000,
-  },
+  choosedOffer: null,
   status: 'Ready',
   response: null,
 };
 
 export const getLoansByPrescoring = createAsyncThunk(
-  'prescoringForm/getLoans',
+  'loanOffers/getLoans',
   async (data: TPrescoringFormData, thunkApi) => {
     const requestPath = 'http://localhost:8080/application';
-    const requestOpstions = {
+    const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     };
-    const response = await fetch(requestPath, requestOpstions);
+    const response = await fetch(requestPath, requestOptions);
     const result = (await response.json()) as IloanOffer[];
     localStorage.setItem('loanOffers', JSON.stringify(result));
     localStorage.setItem('applicationId', JSON.stringify(result[0].applicationId));
@@ -59,10 +38,27 @@ export const getLoansByPrescoring = createAsyncThunk(
   },
 );
 
-const prescoringFormSlice = createSlice({
-  name: 'prescoringForm',
+export const postChoosedOffer = createAsyncThunk(
+  'loanOffers/postOffer',
+  async (data: IloanOffer, thunkApi) => {
+    const requestPath = 'http://localhost:8080/application/apply';
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    };
+    fetch(requestPath, requestOptions);
+  }
+)
+
+const loanOffersSlice = createSlice({
+  name: 'loanOffers',
   initialState,
-  reducers: {},
+  reducers: {
+    chooseOffer: (state, action: PayloadAction<IloanOffer>) => {
+      state.choosedOffer = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getLoansByPrescoring.pending, (state) => {
       state.status = 'Loading';
@@ -84,4 +80,4 @@ export const selectPrescoringLoansArray = (state: RootState) =>
   state.prescoringForm.response;
 export const selectPrescoringFormStatus = (state: RootState) =>
   state.prescoringForm.status;
-export default prescoringFormSlice.reducer;
+export default loanOffersSlice.reducer;

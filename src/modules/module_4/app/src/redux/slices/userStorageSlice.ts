@@ -1,4 +1,3 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //  import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store/store';
@@ -34,6 +33,7 @@ const userStoragSlice = createSlice({
         const offers = JSON.parse(localSLoanOffers) as IloanOffer[];
         state.offersList = offers;
       }
+      state.isSubscribed = localStorage.getItem('isSubscribed') === 'true';
     },
     subscribeUser: (state) => {
       state.isSubscribed = true;
@@ -51,6 +51,9 @@ const userStoragSlice = createSlice({
       }
       state.currentApplication = null;
       state.offersList = [];
+    },
+    setStatus: (state, action: PayloadAction<ELoanSteps>) => {
+      state.status = action.payload;
     },
   },
 });
