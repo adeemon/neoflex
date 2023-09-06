@@ -1,24 +1,65 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { selectLoanStatus } from '../../redux/slices/loanOffersSlice';
+import {
+  postChoosedOffer,
+  selectChoosedOffer,
+  selectLoanStatus,
+  setStatusLoan,
+} from '../../redux/slices/loanOffersSlice';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/store/store';
+import { AppDispatch, useAppDispatch } from '../../redux/store/store';
+import { ELoanSteps, IloanOffer } from '../../interfaces';
+// import { setStatus } from '../../redux/slices/userStorageSlice';
+
+const applyForCard = (
+  <a href="#prescoring-form">
+    <ButtonMain className="platinumCard__apply-button" label="Apply for card" />
+  </a>
+);
+
+const chooseAnOffer = (
+  <a href="#loanOffersWrapper">
+    <ButtonMain label="Choose an offer" />
+  </a>
+);
+
+const getContinueRegButton = (dispatch: AppDispatch, offer: IloanOffer | null, disabled?: boolean) => {
+  const onClick = () => {
+    dispatch(postChoosedOffer(offer));
+    dispatch(setStatusLoan(ELoanSteps.LoandSended));
+  };
+  return (
+    <ButtonMain
+      label="Continue registration"
+      onClick={ onClick }
+      isDisabled={ disabled }
+    />
+  );
+};
+const getButtonToRender = (status: ELoanSteps, offer: IloanOffer | null, dispatch: AppDispatch) => {
+  switch (status) {
+    case ELoanSteps.Prescoring: {
+      return applyForCard;
+    }
+    case ELoanSteps.GotPrescoring: {
+      return chooseAnOffer;
+    }
+    case ELoanSteps.LoanChoosed: {
+      return getContinueRegButton(dispatch, offer);
+    }
+    default: {
+      return getContinueRegButton(dispatch, offer, true);
+    }
+  }
+};
 
 export const LoanButton: React.FC = () => {
-    const loanStatus = useSelector(selectLoanStatus);
-    const dispatch = useAppDispatch();
-    const applyFOrCard =  (<a href="#prescoring-form">
-    <ButtonMain className="platinumCard__apply-button" label="Apply for card" />
-    </a>)
-
-    const continueRegistration = (
-        <Link to="/">
-            <ButtonMain label="Continue registration" />
-        </Link>
-    )
-
-    const onClickHandler = () => {
-        dispatch()
-    }
-}
+  const loanStatus = useSelector(selectLoanStatus);
+  const dispatch = useAppDispatch();
+  const currentOffer = useSelector(selectChoosedOffer);
+  React.useEffect(() => {
+    console.log(loanStatus);
+  });
+  const buttonToRender = getButtonToRender(loanStatus, currentOffer, dispatch);
+  return <>{ buttonToRender }</>;
+};

@@ -16,7 +16,6 @@ export const Homepage: React.FC = () => {
   React.useEffect(() => {
     dispatch(getStateFromStorage());
     console.log(localStorage);
-    console.log('kekw');
   }, []);
   return (
     <>

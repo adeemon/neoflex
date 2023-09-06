@@ -25,6 +25,12 @@ export function parseDateString(value: string, originalValue: string | Date) {
     : parse(originalValue, 'dd.MM.yyyy', new Date());
 }
 
+export function parseDateTimeString(value: string, originalValue: string | Date) {
+  return originalValue instanceof Date
+    ? originalValue
+    : parse(originalValue, 'dd.LL.yyyy hh:mm:ss', new Date());
+}
+
 
 export const getApllicationListFromString = (applicationsString: string) => {
   const splited = applicationsString.split(',');

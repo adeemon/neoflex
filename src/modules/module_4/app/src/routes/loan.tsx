@@ -8,7 +8,8 @@ import { CashbackTab } from '../components/cashbackTab/CashbackTab';
 import { RatesConditionsTab } from '../components/ratesConditionsTab/RatesConditionsTab';
 import { FAQTab } from '../components/faqTab/FAQTab';
 import { HowToGetCardInfo } from '../components/howToGetCardInfo/HowToGetCardInfo';
-import { selectIsAppLoaded } from '../redux/selectors/selectors';
+import { ELoanSteps } from '../interfaces';
+import { selectLoanStatus } from '../redux/slices/loanOffersSlice';
 
 const tabsArray: ITabsPair[] = [
   {
@@ -29,16 +30,23 @@ const tabsArray: ITabsPair[] = [
   },
 ];
 
+const getCurrentLoanPath = (status: ELoanSteps) => {
+  switch (status) {
+    case ELoanSteps.Prescoring: return 'prescoring';
+    case ELoanSteps.GotPrescoring: return '/loan/loanOffers';
+    case ELoanSteps.LoanChoosed: return '/loan/loanOffers';
+    case ELoanSteps.LoandSended: return '/loan/preliminaryDecision';
+    default: return 'prescoring';
+  }
+};
 
 export const Loan: React.FC = () => {
-  const isLoansReady = useSelector(selectIsAppLoaded);
+  const currentStatus = useSelector(selectLoanStatus);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(isLoansReady);
-    if (isLoansReady) {
-      navigate('/loan/loanOffers');
-    } else navigate('prescoring');
-  }, [isLoansReady]);
+    const currentPath = getCurrentLoanPath(currentStatus);
+    navigate(currentPath);
+  }, [currentStatus]);
   return (
     <>
       <PlatinumCardAdv />

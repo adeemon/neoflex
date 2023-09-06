@@ -38,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
           name={ name }
           placeholder={ placeholder }
           type={ type }
-          value={ value?.toString().trim() }
+          value={ value?.toString().replace(/ +/g, ' ') }
           onChange={ (e) =>
             onChange(e.target.value) }
         />

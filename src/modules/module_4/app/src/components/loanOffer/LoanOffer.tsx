@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { IloanOffer } from '../../interfaces';
+import { ELoanSteps, IloanOffer } from '../../interfaces';
 import surpriseImage from '../../assets/images/design/surprise.png';
 import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 import { InputFieldIcon } from '../ui-toolkit/inputFieldIcon/inputFieldIcon';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { selectCurrentApplicationId } from '../../redux/slices/userStorageSlice';
+import { useAppDispatch } from '../../redux/store/store';
+import { chooseOffer, setStatusLoan } from '../../redux/slices/loanOffersSlice';
 
 export const LoanOffer: React.FC<IloanOffer> = ({
   requestedAmount,
@@ -16,6 +18,7 @@ export const LoanOffer: React.FC<IloanOffer> = ({
   isInsuranceEnabled,
   isSalaryClient,
 }) => {
+  const dispatch = useAppDispatch();
   const applicationId = useSelector(selectCurrentApplicationId);
   const onSelectHandler = () => {
     console.log({
@@ -28,6 +31,19 @@ export const LoanOffer: React.FC<IloanOffer> = ({
       isInsuranceEnabled,
       isSalaryClient,
     });
+    dispatch(
+      chooseOffer({
+        applicationId,
+        requestedAmount,
+        totalAmount,
+        term,
+        monthlyPayment,
+        rate,
+        isInsuranceEnabled,
+        isSalaryClient,
+      }),
+    );
+    dispatch(setStatusLoan(ELoanSteps.LoanChoosed));
   };
   return (
     <div className="loanOffer">

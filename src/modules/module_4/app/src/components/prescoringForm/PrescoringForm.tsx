@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { string, InferType } from 'yup';
 import { format, subYears } from 'date-fns';
@@ -9,14 +10,13 @@ import { parseDateString } from '../../utils';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Slider } from '../ui-toolkit/slider/Slider';
 import { Spinner } from '../spinner/Spinner';
-import { postCustom } from '../../api';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
 import { useAppDispatch } from '../../redux/store/store';
-import { getLoansByPrescoring } from '../../redux/slices/loanOffersSlice';
+import { getLoansByPrescoring, selectLoanStatus } from '../../redux/slices/loanOffersSlice';
+import { ELoanSteps } from '../../interfaces';
 
 
-const postPath = 'http://localhost:8080/application';
 const formDataSchema = Yup.object({
   lastName: string().required('Enter your last name'),
   firstName: string().required('Enter your first name'),
@@ -48,8 +48,9 @@ export type TPrescoringFormData = InferType<typeof formDataSchema>;
 export const PrescoringForm: React.FC = () => {
   const [isValidated, setIsValidated] = React.useState(false);
   const [amount, setAmount] = React.useState(1);
-  const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useAppDispatch();
+  const loanStatus = useSelector(selectLoanStatus);
+  const isLoading = loanStatus === ELoanSteps.WaitingPrescoringAnswer;
 
   const { handleSubmit, control } = useForm<TPrescoringFormData>({
     resolver: yupResolver(formDataSchema),
@@ -59,7 +60,7 @@ export const PrescoringForm: React.FC = () => {
       middleName: 'Abs',
       term: '6',
       amount: 50000,
-      email: 'aa8714193@mail.ru',
+      email: 'aa874193@mail.ru',
       birthdate: new Date('02.08.1998'),
       passportNumber: 111111,
       passportSeries: 1111,
@@ -69,21 +70,13 @@ export const PrescoringForm: React.FC = () => {
     shouldFocusError: true,
   });
 
-  const imitateLoading = () => {
-    setIsLoading(true);
-    setTimeout(() =>
-      setIsLoading(false), 10000);
-  };
-
   const onSubmit: SubmitHandler<TPrescoringFormData> = (data) => {
     const output = data;
     output.term = (output.term.replace(/\D{1,}/, ''));
     console.log(data);
     console.log('data');
     dispatch(getLoansByPrescoring(data));
-    imitateLoading();
     setAmount(data.amount);
-    postCustom(postPath, output);
   };
 
   const onValidAttempt = () => {

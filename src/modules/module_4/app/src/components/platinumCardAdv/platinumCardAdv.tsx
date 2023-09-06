@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 import cardImage from '../../assets/images/content/platinumCard.jpg';
+import { LoanButton } from '../loanButton/LoanButton';
 
 
 export const PlatinumCardAdv: React.FC = () =>
@@ -39,9 +39,7 @@ export const PlatinumCardAdv: React.FC = () =>
           </p>
         </li>
       </ul>
-      <a href="#prescoring-form">
-        <ButtonMain className="platinumCard__apply-button" label="Apply for card" />
-      </a>
+      <LoanButton />
       <ImageFigured className="platinumCard__image" src={ cardImage } />
     </section>
   );
