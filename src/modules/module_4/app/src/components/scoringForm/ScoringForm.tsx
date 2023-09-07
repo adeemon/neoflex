@@ -10,9 +10,8 @@ import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
 import { useAppDispatch } from '../../redux/store/store';
-import { IScoringData } from '../../interfaces';
-import { IPostScoringSign, postScoring } from '../../redux/slices/loanOffersSlice';
-import { selectCurrentApplicationId } from '../../redux/slices/userStorageSlice';
+import { IEmploymentData, IScoringDataToSend } from '../../interfaces';
+import { IPostScoringSign, postScoring, selectAppId } from '../../redux/slices/loanOffersSlice';
 
 
 const formDataSchema = Yup.object({
@@ -42,7 +41,9 @@ const formDataSchema = Yup.object({
     .required()
     .min(100000000000, 'Department code must be 12 digits')
     .max(999999999999, 'Department cost must be 12 digits'),
-  salary: number().required('Enter your salary'),
+  salary: number()
+    .typeError('Enter the number')
+    .required('Enter your salary'),
   position: mixed<string>()
     .oneOf(['Worker', 'Mid manager', 'Top manager', 'Owner'])
     .required('Select one of the options'),
@@ -58,7 +59,7 @@ export type TScoringFormData = InferType<typeof formDataSchema>;
 
 export const ScoringForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const applicationId = useSelector(selectCurrentApplicationId);
+  const applicationId = useSelector(selectAppId);
   const [isValidated, setIsValidated] = React.useState(false);
   const { handleSubmit, control } = useForm<TScoringFormData>({
     resolver: yupResolver(formDataSchema),
@@ -92,18 +93,22 @@ export const ScoringForm: React.FC = () => {
       .replace(' ', '_') as ('UNEMPLOYED' | 'SELF_EMPLOYED' | 'EMPLOYED' | 'BUSINESS_OWNER');
     const positionNew = data.position.toUpperCase()
       .replace(' ', '_') as ('WORKER' | 'MID_MANAGER' | 'TOP_MANAGER' | 'OWNER');
-    const dataToSend: IScoringData = {
+    const employmentData: IEmploymentData = {
+      employmentStatus: employmentStatusNew,
+      employerINN: `${data.employerINN}`,
+      salary: data.salary,
+      position: positionNew,
+      workExperienceTotal: data.workExperienceTotal,
+      workExperienceCurrent: data.workExpirienceCurrent,
+    };
+    const dataToSend: IScoringDataToSend = {
       gender: genderNew,
       maritalStatus: martialStatNew,
       dependentAmount: dependentAmountNew,
       passportIssueDate: passportIssueNew,
       passportIssueBranch: passportIssueBranchNew,
-      employmentStatus: employmentStatusNew,
-      employerINN: data.employerINN,
-      salary: data.salary,
-      position: positionNew,
-      workExperienceTotal: data.workExperienceTotal,
-      workExperienceCurrent: data.workExpirienceCurrent,
+      employment: employmentData,
+      account: null,
     };
     const postData: IPostScoringSign = {
       scoringData: dataToSend,

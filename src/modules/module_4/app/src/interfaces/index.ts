@@ -10,6 +10,8 @@ export interface IloanOffer {
 }
 
 export enum ELoanSteps {
+  'AppClosed',
+  'Waiting',
   'Prescoring',
   'WaitingPrescoringAnswer',
   'GotPrescoring',
@@ -18,7 +20,9 @@ export enum ELoanSteps {
   'LoandSended',
   'ScoringStarted',
   'ScoringSended',
+  'ScoringApproved',
   'ScoringRejected',
+  'PaymentsShown',
 }
 
 export interface IScoringData {
@@ -29,6 +33,25 @@ export interface IScoringData {
   passportIssueBranch: string;
   employmentStatus: 'UNEMPLOYED' | 'SELF_EMPLOYED' | 'EMPLOYED' | 'BUSINESS_OWNER';
   employerINN: number;
+  salary: number;
+  position: 'WORKER' | 'MID_MANAGER' | 'TOP_MANAGER' | 'OWNER';
+  workExperienceTotal: number;
+  workExperienceCurrent: number;
+}
+
+export interface IScoringDataToSend {
+  gender: 'MALE' | 'FAMALE';
+  maritalStatus: 'MARRIED' | 'DIVORCED' | 'SINGLE' | 'WIDOW_WIDOWER';
+  dependentAmount: number;
+  passportIssueDate: string;
+  passportIssueBranch: string;
+  employment: IEmploymentData;
+  account: number | null;
+}
+
+export interface IEmploymentData {
+  employmentStatus: 'UNEMPLOYED' | 'SELF_EMPLOYED' | 'EMPLOYED' | 'BUSINESS_OWNER';
+  employerINN: string;
   salary: number;
   position: 'WORKER' | 'MID_MANAGER' | 'TOP_MANAGER' | 'OWNER';
   workExperienceTotal: number;

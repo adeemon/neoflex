@@ -5,6 +5,7 @@ import { Homepage } from './homepage';
 import { Loan } from './loan';
 import { LoanScoring } from './loanScoring';
 import { PageNotFound } from './pageNotFound';
+import { Payments } from './payments';
 import { PreliminaryDecision } from './preliminaryDecision';
 import Root from './root';
 import { WaitingDecision } from './waitingDecision';
@@ -42,8 +43,12 @@ export const router = createBrowserRouter([
         element: <LoanScoring />,
         children: [
           {
-            path: './waitingDecision',
+            path: '/loan/:applicationId/waitingDecision',
             element: <WaitingDecision />,
+          },
+          {
+            path: '/loan/:applicationId/document',
+            element: <Payments />,
           },
         ],
       },

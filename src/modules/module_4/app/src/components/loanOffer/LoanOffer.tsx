@@ -5,9 +5,8 @@ import surpriseImage from '../../assets/images/design/surprise.png';
 import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 import { InputFieldIcon } from '../ui-toolkit/inputFieldIcon/inputFieldIcon';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
-import { selectCurrentApplicationId } from '../../redux/slices/userStorageSlice';
 import { useAppDispatch } from '../../redux/store/store';
-import { chooseOffer, setStatusLoan } from '../../redux/slices/loanOffersSlice';
+import { chooseOffer, selectAppId, setStatusLoan } from '../../redux/slices/loanOffersSlice';
 
 export const LoanOffer: React.FC<IloanOffer> = ({
   requestedAmount,
@@ -19,7 +18,7 @@ export const LoanOffer: React.FC<IloanOffer> = ({
   isSalaryClient,
 }) => {
   const dispatch = useAppDispatch();
-  const applicationId = useSelector(selectCurrentApplicationId);
+  const applicationId = useSelector(selectAppId);
   const onSelectHandler = () => {
     console.log({
       applicationId,

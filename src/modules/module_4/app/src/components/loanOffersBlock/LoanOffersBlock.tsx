@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { ELoanSteps, IloanOffer } from '../../interfaces';
 import { selectLoanOffers } from '../../redux/selectors/selectors';
-import { setStatus } from '../../redux/slices/userStorageSlice';
+import { setStatusLoan } from '../../redux/slices/loanOffersSlice';
 import { useAppDispatch } from '../../redux/store/store';
 import { compareTwoLoanOffers } from '../../utils';
 import { LoanOffer } from '../loanOffer/LoanOffer';
@@ -19,7 +19,7 @@ export const LoanOffersBlock: React.FC = () => {
   ));
   React.useEffect(() => {
     // const currentId = (arrayOfOffers) ? arrayOfOffers[0].applicationId : null;
-    dispatch(setStatus(ELoanSteps.GotPrescoring));
+    dispatch(setStatusLoan(ELoanSteps.GotPrescoring));
     console.log('Статут изменен');
   }, []);
   return (

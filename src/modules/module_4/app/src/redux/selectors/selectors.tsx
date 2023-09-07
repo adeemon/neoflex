@@ -7,9 +7,5 @@ export const selectIsAppLoaded = (state: RootState) => {
   return isCurrentAppNotNull || isLoansLoaded;
 };
 
-export const selectLoanOffers = (state: RootState) => {
-  if (state.userStorage.currentApplication) {
-    return state.userStorage.offersList;
-  }
-  return state.loanOffers.response;
-};
+export const selectLoanOffers = (state: RootState) =>
+  state.loanOffers.response;

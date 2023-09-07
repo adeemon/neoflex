@@ -58,7 +58,7 @@ export const LoanButton: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentOffer = useSelector(selectChoosedOffer);
   React.useEffect(() => {
-    console.log(loanStatus);
+    console.log(ELoanSteps[loanStatus]);
   });
   const buttonToRender = getButtonToRender(loanStatus, currentOffer, dispatch);
   return <>{ buttonToRender }</>;

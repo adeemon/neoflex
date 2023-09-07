@@ -33,10 +33,12 @@ const tabsArray: ITabsPair[] = [
 const getCurrentLoanPath = (status: ELoanSteps) => {
   switch (status) {
     case ELoanSteps.Prescoring: return 'prescoring';
+    case ELoanSteps.WaitingPrescoringAnswer: return 'prescoring';
     case ELoanSteps.GotPrescoring: return '/loan/loanOffers';
     case ELoanSteps.LoanChoosed: return '/loan/loanOffers';
     case ELoanSteps.LoandSended: return '/loan/preliminaryDecision';
-    default: return 'prescoring';
+    case ELoanSteps.AppClosed: return '/';
+    default: return '/loan/preliminaryDecision';
   }
 };
 
