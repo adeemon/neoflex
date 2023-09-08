@@ -8,7 +8,7 @@ import { PageNotFound } from './pageNotFound';
 import { PreliminaryDecision } from './preliminaryDecision';
 import Root from './root';
 import { WaitingDecision } from './waitingDecision';
-import { PaymentsTable } from '../components/paymentsTable/PaymentsTable';
+import { DocumentPage } from './documentPage/DocumentPage';
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/loan/:applicationId/document',
-            element: <PaymentsTable />,
+            element: <DocumentPage />,
           },
         ],
       },
