@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import { Checkbox } from '../checkbox/Checkbox';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 
 const formDataChema = Yup.object({
-  checkbox: Yup.boolean().oneOf([true], 'You have to accept'),
+  paymentCheckbox: Yup.bool().oneOf([true], 'Checkbox selection is required'),
 });
 
 export type TPaymentAgree = Yup.InferType<typeof formDataChema>;
@@ -17,8 +17,7 @@ export type TPaymentAgree = Yup.InferType<typeof formDataChema>;
 export const PaymentsAgreeOPtions: React.FC = () => {
   const dispatch = useAppDispatch();
   const applicationId = useSelector(selectAppId);
-  const { handleSubmit, control } = useForm<TPaymentAgree>({
-    resolver: yupResolver(formDataChema),
+  const { handleSubmit, control, register } = useForm<TPaymentAgree>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     shouldFocusError: true,
@@ -32,14 +31,17 @@ export const PaymentsAgreeOPtions: React.FC = () => {
     <form className="paymentAgreeForm" onSubmit={handleSubmit(onSubmit)}>
       <div className="paymentAgreeForm__checkbox">
         <Controller
-          name="checkbox"
+          name="paymentCheckbox"
           control={control}
+          rules={{ required: 'this is req' }}
           render={({ field, fieldState: { error } }) =>
           (
             <Checkbox
+              {...field}
+              {...register('paymentCheckbox')}
+              id="paymentCheckbox"
               label="I agree with the payment schedule"
               errorMessage={error?.message}
-              {...field}
             />
           )}
         />
@@ -47,6 +49,7 @@ export const PaymentsAgreeOPtions: React.FC = () => {
       <ButtonMain
         label="Send"
         className="paymentAgreeForm__accept"
+        type="submit"
         onClick={() => { handleSubmit(onSubmit)(); }}
       />
     </form>

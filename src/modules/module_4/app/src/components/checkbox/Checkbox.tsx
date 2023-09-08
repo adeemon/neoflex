@@ -1,62 +1,61 @@
 import { forwardRef } from 'react';
 import * as React from 'react';
 
+
 interface InputProps {
   name: string;
   label?: string | null;
-  className?: string;
-  defaultChecked?: boolean;
-  onChange: (value: boolean) => void;
   errorMessage?: string;
+  value?: boolean;
+  id: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, InputProps>(({
   name,
   label,
-  defaultChecked,
-  className,
-  onChange,
   errorMessage,
+  value,
+  id,
+  onChange,
 }, ref) => {
-  const [checked, setChecked] = React.useState(defaultChecked);
-  console.log(checked);
+  const [checked, setChecked] = React.useState(false);
+  console.log(checked, value);
   return (
-    <button
-      type="button"
-      className="checkbox__container"
-      onClick={ () =>
-        setChecked(!checked) }
-    >
-      <label className="checkbox__label" htmlFor={ name }>
+    <label className="checkbox__label" htmlFor={ name }>
+      <button
+        type="button"
+        onClick={ () =>
+          setChecked(!checked) }
+        onKeyPress={ () =>
+          setChecked(!checked) }
+      >
         <input
-          className={ `${className || ''} checkbox` }
+          className={ `checkbox__check${checked ? '-checked' : ''}` }
           ref={ ref }
           name={ name }
           type="checkbox"
-          checked={ checked }
-          defaultChecked={ checked }
-          onChange={ (e) => {
-            setChecked(e.target.checked);
-            onChange(e.target.checked);
-          } }
+          checked={checked}
+          value={checked ? 'yes' : 'no'}
+          id={id}
+          onChange={(e) =>
+            onChange(e)}
         />
         { errorMessage && (
           <div className="input__error-message" ref={ ref }>
             { errorMessage }
           </div>
         ) }
-        { checked ? 'X' : ' ' }
-        { label }
-      </label>
-    </button>
+      </button>
+      {label}
+    </label>
   );
 });
 
 Checkbox.defaultProps = {
   label: undefined,
-  className: undefined,
-  errorMessage: 'Чекбокс пустой',
-  defaultChecked: false,
+  errorMessage: undefined,
+  value: false,
 };
 
 
