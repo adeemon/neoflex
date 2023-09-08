@@ -5,10 +5,10 @@ import { Homepage } from './homepage';
 import { Loan } from './loan';
 import { LoanScoring } from './loanScoring';
 import { PageNotFound } from './pageNotFound';
-import { Payments } from './payments';
 import { PreliminaryDecision } from './preliminaryDecision';
 import Root from './root';
 import { WaitingDecision } from './waitingDecision';
+import { PaymentsTable } from '../components/paymentsTable/PaymentsTable';
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/loan/:applicationId/document',
-            element: <Payments />,
+            element: <PaymentsTable />,
           },
         ],
       },

@@ -48,3 +48,11 @@ export const compareTwoLoanOffers = (firstOffer: IloanOffer, secondOffer: IloanO
   const secondOverpay = secondTotalPayed - secondOverget - secondOffer.totalAmount;
   return firstOverpay - secondOverpay;
 };
+
+export const insertSpaceBeforeUpperLetter = (inputString: string) => {
+  let indexOfFirstUpper = inputString.search(/[A-Z]/);
+  if (indexOfFirstUpper === -1) {
+    return inputString;
+  }
+  return `${inputString.slice(0, indexOfFirstUpper)} ${inputString.slice(indexOfFirstUpper)}`;
+};
