@@ -1,0 +1,10 @@
+.paymentAgreeForm {
+    @include flexCenter;
+    justify-content: flex-end;
+    gap: 40px;
+    padding: 40px 0 40px 0;
+    &__accept {
+        width: 96px;
+        height: 40px;
+    }
+}

@@ -1,11 +1,12 @@
-// import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { selectAppId } from '../../redux/slices/loanOffersSlice';
 import { useAppDispatch } from '../../redux/store/store';
 import { Checkbox } from '../checkbox/Checkbox';
+import { DenyButton } from '../denyButton/DenyButton';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 
 const formDataChema = Yup.object({
@@ -17,15 +18,17 @@ export type TPaymentAgree = Yup.InferType<typeof formDataChema>;
 export const PaymentsAgreeOPtions: React.FC = () => {
   const dispatch = useAppDispatch();
   const applicationId = useSelector(selectAppId);
-  const { handleSubmit, control, register } = useForm<TPaymentAgree>({
+  const { handleSubmit, control } = useForm<TPaymentAgree>({
+    resolver: yupResolver(formDataChema),
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     shouldFocusError: true,
   });
-  const onSubmit = () => {
+  const onSubmit: SubmitHandler<TPaymentAgree> = (data) => {
     console.log('gogogog');
     console.log(dispatch);
     console.log(applicationId);
+    console.log(data);
   };
   const form = (
     <form className="paymentAgreeForm" onSubmit={handleSubmit(onSubmit)}>
@@ -33,12 +36,10 @@ export const PaymentsAgreeOPtions: React.FC = () => {
         <Controller
           name="paymentCheckbox"
           control={control}
-          rules={{ required: 'this is req' }}
           render={({ field, fieldState: { error } }) =>
           (
             <Checkbox
               {...field}
-              {...register('paymentCheckbox')}
               id="paymentCheckbox"
               label="I agree with the payment schedule"
               errorMessage={error?.message}
@@ -54,5 +55,10 @@ export const PaymentsAgreeOPtions: React.FC = () => {
       />
     </form>
   );
-  return (form);
+  return (
+    <div className="paymentAgreeOptions__wrapper">
+      <DenyButton />
+      { form }
+    </div>
+  );
 };

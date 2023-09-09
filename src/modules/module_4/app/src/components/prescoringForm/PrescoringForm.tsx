@@ -84,7 +84,11 @@ export const PrescoringForm: React.FC = () => {
   };
 
   const form = (
-    <form className="prescoring-form" onSubmit={ handleSubmit(onSubmit) } id="prescoring-form">
+    <form
+      className="prescoring-form"
+      onSubmit={ handleSubmit(onSubmit) }
+      id="prescoring-form"
+    >
       <div className="prescoring-form__customize-card">
         <div className="prescoring-form__amount">
           <p className="prescoring-form__title">
@@ -108,7 +112,7 @@ export const PrescoringForm: React.FC = () => {
                     className="prescoring-form__amount-content"
                     { ...field }
                   />
-                ) }
+              ) }
             />
             <Slider min={ 15000 } max={ 600000 } current={ amount } />
           </div>
@@ -147,7 +151,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -169,7 +173,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -191,7 +195,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -210,7 +214,7 @@ export const PrescoringForm: React.FC = () => {
                     errorMessage={ error?.message }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -232,7 +236,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -254,7 +258,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -277,7 +281,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -300,7 +304,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-              ) }
+                ) }
             />
           </div>
         </div>
