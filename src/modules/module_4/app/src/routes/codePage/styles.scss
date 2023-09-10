@@ -1,0 +1,40 @@
+.code {
+    @include flexCenter;
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+    padding: 113px;
+    &__wrapper {
+        display: flex;
+        gap: 16px;
+        z-index: 10;
+    }
+    &__box {
+        @include flexCenter;
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgba(128, 128, 128, 1);
+        border-radius: 8px;
+        z-index: 100;
+        &-active {
+            border: 1px solid #3182CE;
+        }
+        &-empty {
+            background-image: url('../../assets/images/design/Code_inactive_bckg.svg');
+            background-position: center;
+        }
+    }
+    &__number {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+    }
+    &__error {
+        color: #FF5631;
+        font-family: "Ubuntu";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 100%;
+    }
+}

@@ -4,14 +4,26 @@ import { Outlet } from 'react-router-dom';
 import { ELoanSteps } from '../interfaces';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
-import { denyApplication, selectAppId, selectLoanStatus, setAppId, setLoans, setStatusLoan } from '../redux/slices/loanOffersSlice';
-import { getStateFromStorage, saveLoans, selectIsRestored, selectStoredOffers, selectStoredStatus, saveStatus, selectStoredApplicationId, saveApplicationId, clearStorage } from '../redux/slices/userStorageSlice';
+import {
+  denyApplication,
+  selectAppId, selectLoanOffersArray,
+  selectLoanStatus, setAppId,
+  setLoans, setStatusLoan,
+} from '../redux/slices/loanOffersSlice';
+import {
+  getStateFromStorage, saveLoans,
+  selectIsRestored, selectStoredOffers,
+  selectStoredStatus, saveStatus,
+  selectStoredApplicationId,
+  saveApplicationId,
+  clearStorage,
+} from '../redux/slices/userStorageSlice';
 import { useAppDispatch } from '../redux/store/store';
-
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const loanOffers = useSelector(selectStoredOffers);
+  const storedOffers = useSelector(selectStoredOffers);
+  const loanOffers = useSelector(selectLoanOffersArray);
   const storedStatus = useSelector(selectStoredStatus);
   const storedAppId = useSelector(selectStoredApplicationId);
   const loanStatus = useSelector(selectLoanStatus);
@@ -19,13 +31,13 @@ const App: React.FC = () => {
   const applicationId = useSelector(selectAppId);
   React.useEffect(() => {
     dispatch(getStateFromStorage());
-    console.log(localStorage);
   }, []);
   React.useEffect(() => {
     restored && dispatch(saveStatus(loanStatus));
-    if (loanStatus === ELoanSteps.AppClosed) {
+    if (loanStatus === ELoanSteps.AppClosed
+      || loanStatus === ELoanSteps.ScoringRejected) {
+      dispatch(denyApplication());
       dispatch(clearStorage());
-      dispatch(denyApplication({ applicationId }));
     }
   }, [loanStatus]);
   React.useEffect(() => {
@@ -38,7 +50,7 @@ const App: React.FC = () => {
     if (restored) {
       dispatch(setAppId(storedAppId));
       dispatch(setStatusLoan(storedStatus));
-      dispatch(setLoans(loanOffers));
+      dispatch(setLoans(storedOffers));
     }
   }, [restored]);
   return (

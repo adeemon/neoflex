@@ -12,14 +12,9 @@ export const NewsSub: React.FC = () => {
   const dispatch = useAppDispatch();
   const postPath = 'http://localhost:8080/email';
 
-  React.useEffect(() => {
-    console.log(isSubscribed);
-  }, [isSubscribed]);
-
   const onClick = (email: string) => {
     dispatch(subscribeUser());
     postCustom(postPath, { email });
-    console.log(isSubscribed);
   };
 
 

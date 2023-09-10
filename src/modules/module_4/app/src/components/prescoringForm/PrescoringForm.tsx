@@ -73,8 +73,6 @@ export const PrescoringForm: React.FC = () => {
   const onSubmit: SubmitHandler<TPrescoringFormData> = (data) => {
     const output = data;
     output.term = (output.term.replace(/\D{1,}/, ''));
-    console.log(data);
-    console.log('data');
     dispatch(getLoansByPrescoring(data));
     setAmount(data.amount);
   };
@@ -86,7 +84,7 @@ export const PrescoringForm: React.FC = () => {
   const form = (
     <form
       className="prescoring-form"
-      onSubmit={ handleSubmit(onSubmit) }
+      onSubmit={handleSubmit(onSubmit)}
       id="prescoring-form"
     >
       <div className="prescoring-form__customize-card">

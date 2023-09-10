@@ -82,7 +82,6 @@ export const ScoringForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<TScoringFormData> = (data) => {
-    console.log(data);
     const genderNew = data.gender.toUpperCase() as ('MALE' | 'FAMALE');
     const martialStatNew = data.maritalStatus.toUpperCase()
       .replace(' ', '_') as ('MARRIED' | 'DIVORCED' | 'SINGLE' | 'WIDOW_WIDOWER');

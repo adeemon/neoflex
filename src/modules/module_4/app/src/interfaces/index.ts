@@ -12,17 +12,23 @@ export interface IloanOffer {
 export enum ELoanSteps {
   'AppClosed',
   'Waiting',
-  'Prescoring',
+  'AppInit',
+  'PrescoringStarted',
   'WaitingPrescoringAnswer',
-  'GotPrescoring',
   'LoanOffers',
   'LoanChoosed',
   'LoandSended',
   'ScoringStarted',
   'ScoringSended',
+  'StatusWaiting',
   'ScoringApproved',
   'ScoringRejected',
-  'PaymentsShown',
+  'DocumentOpened',
+  'DocumentAccepted',
+  'DocumentsSigned',
+  'CodeSended',
+  'CodeRejected',
+  'CreditIssued',
 }
 
 export interface IScoringData {

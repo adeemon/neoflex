@@ -9,6 +9,8 @@ import { PreliminaryDecision } from './preliminaryDecision';
 import Root from './root';
 import { WaitingDecision } from './waitingDecision';
 import { DocumentPage } from './documentPage/DocumentPage';
+import { DocumentsSign } from './documentsSign/DocumentsSign';
+import { CodePage } from './codePage/CodePage';
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
           {
             path: '/loan/:applicationId/document',
             element: <DocumentPage />,
+          },
+          {
+            path: '/loan/:applicationId/document/sign',
+            element: <DocumentsSign />,
+          },
+          {
+            path: '/loan/:applicationId/code',
+            element: <CodePage />,
           },
         ],
       },

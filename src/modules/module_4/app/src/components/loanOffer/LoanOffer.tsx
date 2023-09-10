@@ -20,16 +20,6 @@ export const LoanOffer: React.FC<IloanOffer> = ({
   const dispatch = useAppDispatch();
   const applicationId = useSelector(selectAppId);
   const onSelectHandler = () => {
-    console.log({
-      applicationId,
-      requestedAmount,
-      totalAmount,
-      term,
-      monthlyPayment,
-      rate,
-      isInsuranceEnabled,
-      isSalaryClient,
-    });
     dispatch(
       chooseOffer({
         applicationId,

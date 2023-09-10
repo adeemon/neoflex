@@ -38,10 +38,10 @@ const getContinueRegButton = (dispatch: AppDispatch, offer: IloanOffer | null, d
 };
 const getButtonToRender = (status: ELoanSteps, offer: IloanOffer | null, dispatch: AppDispatch) => {
   switch (status) {
-    case ELoanSteps.Prescoring: {
+    case ELoanSteps.PrescoringStarted: {
       return applyForCard;
     }
-    case ELoanSteps.GotPrescoring: {
+    case (ELoanSteps.LoanOffers): {
       return chooseAnOffer;
     }
     case ELoanSteps.LoanChoosed: {
@@ -57,9 +57,6 @@ export const LoanButton: React.FC = () => {
   const loanStatus = useSelector(selectLoanStatus);
   const dispatch = useAppDispatch();
   const currentOffer = useSelector(selectChoosedOffer);
-  React.useEffect(() => {
-    console.log(ELoanSteps[loanStatus]);
-  });
   const buttonToRender = getButtonToRender(loanStatus, currentOffer, dispatch);
   return <>{ buttonToRender }</>;
 };

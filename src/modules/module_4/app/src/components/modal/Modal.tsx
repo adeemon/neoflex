@@ -1,4 +1,5 @@
 import { MouseEvent, useEffect, useRef } from 'react';
+import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 
 const isClickInsideRectangle = (e: MouseEvent, element: HTMLElement) => {
   const r = element.getBoundingClientRect();
@@ -20,6 +21,7 @@ interface IModalProps {
   proceedLabel: string;
   cancelLabel: string;
   isOnlyProceed?: boolean;
+  isCloseAfterProceed?: boolean;
 }
 
 export const Modal = ({
@@ -31,11 +33,11 @@ export const Modal = ({
   cancelLabel,
   isOnlyProceed,
   describtion,
+  isCloseAfterProceed,
 }: IModalProps) => {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    console.log(isOpened);
     if (isOpened) {
       ref.current?.showModal();
       document.body.classList.add('modal-open');
@@ -58,28 +60,31 @@ export const Modal = ({
       onClick={ (e) =>
         ref.current && !isClickInsideRectangle(e, ref.current) && onClose() }
     >
+      <div className="modal">
       <p className="modal__title">
         { title }
       </p>
       <p className="modal__description">
         { describtion }
       </p>
-      <div>
+      <div className="modal__options">
         { !isOnlyProceed
           && (
-            <button
+            <ButtonMain
               type="button"
-              onClick={ onClose }
+              onClick={ isCloseAfterProceed ? proceedAndClose : onProceed }
               className="modal__cancel-button"
+              id="modal__cancel-button-id"
             >{ cancelLabel }
-            </button>
+            </ButtonMain>
           ) }
-        <button
+        <ButtonMain
           type="button"
-          onClick={ proceedAndClose }
+          onClick={ onClose }
           className="modal__proceed-button"
         >{ proceedLabel }
-        </button>
+        </ButtonMain>
+      </div>
       </div>
     </dialog>
   );
@@ -87,4 +92,5 @@ export const Modal = ({
 
 Modal.defaultProps = {
   isOnlyProceed: false,
+  isCloseAfterProceed: true,
 };

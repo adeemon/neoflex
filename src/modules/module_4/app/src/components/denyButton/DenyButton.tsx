@@ -17,10 +17,10 @@ export const DenyButton: React.FC = () => {
   const title = 'Deny application';
   const isOnlyProceed = isDeny;
   const onDeny = () => {
-    dispatch(setStatusLoan(ELoanSteps.AppClosed));
     setIsDeny(true);
   };
   const onOfterDeny = () => {
+    dispatch(setStatusLoan(ELoanSteps.AppClosed));
     navigate('/');
   };
   const firstModal = (
@@ -29,11 +29,12 @@ export const DenyButton: React.FC = () => {
       title={ title }
       describtion={ describtion }
       isOnlyProceed={ isOnlyProceed }
-      onClose={ () =>
-        setIsOpened(false) }
+      onClose={() =>
+        setIsOpened(false)}
       onProceed={ onDeny }
       proceedLabel="Cancel"
       cancelLabel="Deny"
+      isCloseAfterProceed={ false }
     />
   );
 
@@ -44,9 +45,14 @@ export const DenyButton: React.FC = () => {
         title={ title }
         describtion={ describtion }
         isOnlyProceed={ isOnlyProceed }
-        onClose={ () =>
-          setIsOpened(false) }
-        onProceed={ onOfterDeny }
+        onClose={ () => {
+          onOfterDeny();
+          setIsOpened(false);
+        } }
+        onProceed={ () => {
+          onOfterDeny();
+          setIsOpened(false);
+        } }
         proceedLabel="Go home"
         cancelLabel="Deny"
       />
@@ -54,7 +60,12 @@ export const DenyButton: React.FC = () => {
   );
   return (
     <div className="deny__wrapper">
-      <ButtonMain className="deny__button" label="Deny" />
+      <ButtonMain
+        className="deny__button"
+        label="Deny"
+        onClick={ () =>
+          setIsOpened(true) }
+      />
       { isDeny
         ? denyModal
         : firstModal }

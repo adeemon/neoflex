@@ -14,7 +14,7 @@ const initialState: IUserStorage = {
   isSubscribed: false,
   currentApplication: null,
   offersList: [],
-  status: ELoanSteps.Prescoring,
+  status: ELoanSteps.AppInit,
   isRestored: false,
 };
 
@@ -52,11 +52,11 @@ const userStoragSlice = createSlice({
     },
     saveStatus: (state, action: PayloadAction<ELoanSteps>) => {
       state.status = action.payload;
-      console.log(`status changed to ${ELoanSteps[action.payload]}`);
       localStorage.setItem('status', `${state.status}`);
     },
     saveLoans: (state, action: PayloadAction<IloanOffer[]>) => {
       state.offersList = action.payload;
+      localStorage.setItem('loanOffers', JSON.stringify(action.payload));
     },
     clearStorage: (state) => {
       localStorage.clear();

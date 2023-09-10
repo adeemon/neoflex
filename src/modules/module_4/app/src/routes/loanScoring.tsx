@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { ELoanSteps } from '../interfaces';
@@ -6,16 +6,34 @@ import { selectAppId, selectLoanStatus, setStatusLoan } from '../redux/slices/lo
 import { useAppDispatch } from '../redux/store/store';
 import { ScoringForm } from '../components/scoringForm/ScoringForm';
 import { Spinner } from '../components/spinner/Spinner';
-import { selectIsAppLoaded } from '../redux/selectors/selectors';
+import { navigateLoan } from './loan';
+import { selectIsRestored } from '../redux/slices/userStorageSlice';
 
 
-const getCurrentLoanPath = (status: ELoanSteps, applicationId: number | null) => {
-  switch (status) {
-    case ELoanSteps.ScoringApproved: return `/loan/${applicationId}/waitingDecision`;
-    case ELoanSteps.ScoringRejected: return `/loan/${applicationId}/waitingDecision`;
-    case ELoanSteps.AppClosed: return '/loan';
-    case ELoanSteps.PaymentsShown: return `/loan/${applicationId}/document`;
-    default: return `/loan/${applicationId}`;
+export const navigateLoanScoring = (
+  status: ELoanSteps,
+  applicationId: number | null,
+  navigate: NavigateFunction,
+) => {
+  console.log('navigated by scoring');
+  if (status < 6) {
+    navigateLoan(status, navigate);
+  } else {
+    switch (status) {
+      case ELoanSteps.ScoringSended: {
+        navigate(`/loan/${applicationId}/waitingDecision`, { replace: true });
+        break;
+      }
+      case ELoanSteps.ScoringRejected || ELoanSteps.AppClosed: {
+        navigate('/', { replace: true });
+        break;
+      }
+      case ELoanSteps.DocumentAccepted: {
+        navigate(`/loan/${applicationId}/document/sign`, { replace: true });
+        break;
+      }
+      default: break;
+    }
   }
 };
 
@@ -26,25 +44,14 @@ export const LoanScoring: React.FC = () => {
   const navigate = useNavigate();
   const isScoring = currentStatus === ELoanSteps.ScoringStarted;
   const isWaiting = currentStatus === ELoanSteps.Waiting;
-  const isLoaded = useSelector(selectIsAppLoaded);
+  const selectRestored = useSelector(selectIsRestored);
 
-  useEffect(() => {
-    if (isLoaded && applicationId !== null) {
-      console.log(ELoanSteps[currentStatus]);
-      console.log(applicationId);
-      console.log('renavigate')!;
-      const currentPath = getCurrentLoanPath(currentStatus, applicationId);
-      navigate(currentPath);
-    }
-  }, [currentStatus]);
   useEffect(() => {
     if (currentStatus === ELoanSteps.LoandSended) {
       dispatch(setStatusLoan(ELoanSteps.ScoringStarted));
     }
-    if (currentStatus === ELoanSteps.AppClosed) {
-      navigate('../loan');
-    }
-  });
+    selectRestored && navigateLoanScoring(currentStatus, applicationId, navigate);
+  }, [currentStatus]);
 
   const getElementToRender = () => {
     if (isWaiting) {

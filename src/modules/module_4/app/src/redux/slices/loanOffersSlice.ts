@@ -7,15 +7,15 @@ interface IloanOffers {
   applicationId: number | null;
   choosedOffer: IloanOffer | null;
   status: ELoanSteps;
-  response: IloanOffer[] | null;
+  response: IloanOffer[];
   payments: IPaymentSheduleNote[] | null;
 }
 
 const initialState: IloanOffers = {
   applicationId: null,
   choosedOffer: null,
-  status: ELoanSteps.Prescoring,
-  response: null,
+  status: ELoanSteps.AppInit,
+  response: [],
   payments: [],
 };
 
@@ -104,24 +104,77 @@ export const postScoring = createAsyncThunk(
   },
 );
 
-export const getStatusFromApi = createAsyncThunk(
+export const getStatusFromApi = createAsyncThunk < IAppFromApiResponse, void, { state: RootState }>(
   'loanOffers/getStatusFromApi',
-  async (appId: number | null) => {
-    const requestPath = `http://localhost:8080/admin/application/${appId}`;
+  async (_: void, { getState }) => {
+    const requestPath = 'http://localhost:8080/'
+    + `admin/application/${getState().loanOffers.applicationId}`;
     let result = await fetch(requestPath);
     let output = await result.json() as IAppFromApiResponse;
     return output;
   },
 );
 
-export const denyApplication = createAsyncThunk(
+export const denyApplication = createAsyncThunk <void, void, { state: RootState }>(
   'loanOffers/denyApp',
-  async (data: IDenySign) => {
-    const requestPath = `http://localhost:8080/application/${data.applicationId}/deny`;
+  async (_: void, { getState }) => {
+    const requestPath = 'http://localhost:8080/application/'
+    + `${getState().loanOffers.applicationId}/deny`;
     const requestOptions = {
       method: 'POST',
     };
     fetch(requestPath, requestOptions);
+  },
+);
+
+export const formDocuments = createAsyncThunk<void, void, { state: RootState }>(
+  'loanOffers/formDocs',
+  async (_: void, { getState }) => {
+    const appId = getState().loanOffers.applicationId;
+    const requestPath = `http://localhost:8080/document/${appId}`;
+    const requestOptions = {
+      method: 'POST',
+    };
+    const result = await fetch(requestPath, requestOptions);
+    const resultToRet = await result.json();
+    return resultToRet;
+  },
+);
+
+export const signDocuments = createAsyncThunk<void, void, { state: RootState }>(
+  'loanOffers/signDocs',
+  async (_: void, { getState }) => {
+    const appId = getState().loanOffers.applicationId;
+    const requestPath = `http://localhost:8080/document/${appId}/sign`;
+    const requestOptions = {
+      method: 'POST',
+    };
+    const result = await fetch(requestPath, requestOptions);
+    const resultToRet = await result.json();
+    return resultToRet;
+  },
+);
+
+export const postCode = createAsyncThunk<void, string, { state: RootState }>(
+  'loanOffers/postCode',
+  async (code: string, { getState, rejectWithValue }) => {
+    const appId = getState().loanOffers.applicationId;
+    const requestPath = `http://localhost:8080/document/${appId}/sign/code`;
+    const requestOptions = {
+      method: 'POST',
+      Hheaders: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(code),
+    };
+    const result = fetch(requestPath, requestOptions);
+    console.log('luldsaf');
+    console.log(await (await result).json());
+    if ((await result).status === 415) {
+      console.log('lulf');
+    }
+    if ((await result).status !== 200) {
+      console.log('kekw');
+      return rejectWithValue({ message: 'Wrong code' });
+    }
   },
 );
 
@@ -151,7 +204,7 @@ const loanOffersSlice = createSlice({
       (state, action: PayloadAction<IloanOffer[]>) => {
         state.response = action.payload;
         state.applicationId = action.payload[0].applicationId;
-        state.status = ELoanSteps.GotPrescoring;
+        state.status = ELoanSteps.LoanOffers;
       },
     );
     builder.addCase(getLoansByPrescoring.rejected, () => {
@@ -170,20 +223,52 @@ const loanOffersSlice = createSlice({
       state.status = ELoanSteps.ScoringApproved;
     });
     builder.addCase(denyApplication.fulfilled, (state) => {
-      state.status = ELoanSteps.AppClosed;
+      state.status = ELoanSteps.AppInit;
       state.applicationId = null;
       state.response = [];
     });
+    builder.addCase(denyApplication.rejected, (state) => {
+      state.status = ELoanSteps.AppInit;
+      state.applicationId = null;
+      state.response = [];
+    });
+    builder.addCase(getStatusFromApi.pending, (state) => {
+      state.status = ELoanSteps.StatusWaiting;
+    });
     builder.addCase(getStatusFromApi.fulfilled, (state, action: PayloadAction<IAppFromApiResponse>) => {
       if (action.payload.status === 'CC_DENIED') {
-        state.status = ELoanSteps.AppClosed;
+        state.status = ELoanSteps.ScoringRejected;
       }
       if (action.payload.status === 'CC_APPROVED') {
-        state.status = ELoanSteps.PaymentsShown;
+        state.status = ELoanSteps.ScoringApproved;
       }
       if (action.payload.credit) {
         state.payments = action.payload.credit.paymentSchedule;
       }
+    });
+    builder.addCase(formDocuments.fulfilled, (state) => {
+      state.status = ELoanSteps.DocumentAccepted;
+    });
+    builder.addCase(formDocuments.rejected, () => {
+    });
+    builder.addCase(formDocuments.pending, () => {
+    });
+    builder.addCase(signDocuments.fulfilled, (state) => {
+      state.status = ELoanSteps.DocumentsSigned;
+    });
+    builder.addCase(signDocuments.rejected, (state) => {
+      state.status = ELoanSteps.DocumentsSigned;
+    });
+    builder.addCase(postCode.fulfilled, () => {
+      console.log('Кредит одобрен!');
+    });
+    builder.addCase(postCode.pending, (state) => {
+      console.log('ждем подтверждения кода');
+      state.status = ELoanSteps.CodeSended;
+    });
+    builder.addCase(postCode.rejected, (state) => {
+      console.log('Ашибка');
+      state.status = ELoanSteps.CodeRejected;
     });
   },
 });

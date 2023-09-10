@@ -1,5 +1,5 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { PlatinumCardAdv } from '../components/platinumCardAdv/platinumCardAdv';
 import { ITabsPair, TabsManager } from '../components/tabsManager/TabsManager';
@@ -9,7 +9,8 @@ import { RatesConditionsTab } from '../components/ratesConditionsTab/RatesCondit
 import { FAQTab } from '../components/faqTab/FAQTab';
 import { HowToGetCardInfo } from '../components/howToGetCardInfo/HowToGetCardInfo';
 import { ELoanSteps } from '../interfaces';
-import { selectLoanStatus } from '../redux/slices/loanOffersSlice';
+import { selectLoanStatus, setStatusLoan } from '../redux/slices/loanOffersSlice';
+import { selectIsRestored } from '../redux/slices/userStorageSlice';
 
 const tabsArray: ITabsPair[] = [
   {
@@ -30,29 +31,47 @@ const tabsArray: ITabsPair[] = [
   },
 ];
 
-const getCurrentLoanPath = (status: ELoanSteps) => {
+export const navigateLoan = (status: ELoanSteps, navigate: NavigateFunction) => {
+  console.log('navigated by loan');
   switch (status) {
-    case ELoanSteps.Prescoring: return 'prescoring';
-    case ELoanSteps.WaitingPrescoringAnswer: return 'prescoring';
-    case ELoanSteps.GotPrescoring: return '/loan/loanOffers';
-    case ELoanSteps.LoanChoosed: return '/loan/loanOffers';
-    case ELoanSteps.LoandSended: return '/loan/preliminaryDecision';
-    case ELoanSteps.AppClosed: return '/';
-    default: return '/loan/preliminaryDecision';
+    case ELoanSteps.AppInit: {
+      navigate('/loan/prescoring', { replace: true });
+      break;
+    }
+    case (ELoanSteps.LoanOffers):
+    {
+      navigate('/loan/loanOffers', { replace: true });
+      break;
+    }
+    case (ELoanSteps.LoanChoosed): {
+      navigate('/loan/loanOffers', { replace: true });
+      break;
+    }
+    case ELoanSteps.LoandSended: {
+      navigate('/loan/preliminaryDecision', { replace: true });
+      break;
+    }
+    default: break;
   }
 };
 
 export const Loan: React.FC = () => {
   const currentStatus = useSelector(selectLoanStatus);
+  const isRestored = useSelector(selectIsRestored);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
-    const currentPath = getCurrentLoanPath(currentStatus);
-    navigate(currentPath);
+    isRestored && navigateLoan(currentStatus, navigate);
   }, [currentStatus]);
+  useEffect(() => {
+    if (currentStatus === ELoanSteps.AppInit) {
+      dispatch(setStatusLoan(ELoanSteps.PrescoringStarted));
+    }
+  }, []);
   return (
     <>
       <PlatinumCardAdv />
-      <TabsManager tabsArray={tabsArray} />
+      <TabsManager tabsArray={ tabsArray } />
       <HowToGetCardInfo />
       <Outlet />
     </>

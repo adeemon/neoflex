@@ -1,0 +1,11 @@
+.credit-congrat {
+    @include flexCenter;
+    flex-direction: column;
+    gap: 32px;
+    padding: 50px 100px 100px 100px;
+    &__button {
+        width: 268px;
+        height: 50px;
+        border-radius: 16px;
+    }
+}

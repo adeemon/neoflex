@@ -25,6 +25,7 @@
 @import "../styles/body";
 @import "../styles/header";
 @import "../styles/footer";
+@import "../assets/styles/typography.scss";
 @import "../components/cardDesigns/styles.scss";
 @import "../components/features/styles.scss";
 @import "../styles/main";
@@ -64,4 +65,9 @@
 @import "../components/table/styles.scss";
 @import "../routes/documentPage/styles.scss";
 @import "../components/checkbox/styles.scss";
-@import "../components/paymentsAgreeOptions/styles.scss"
+@import "../components/paymentsAgreeOptions/styles.scss";
+@import "../components/checkboxAgreeForm/styles.scss";
+@import "../components/denyButton/styles.scss";
+@import "../components/modal/styles.scss";
+@import "../routes/documentsSign/styles.scss";
+@import "../routes/codePage/styles.scss";
