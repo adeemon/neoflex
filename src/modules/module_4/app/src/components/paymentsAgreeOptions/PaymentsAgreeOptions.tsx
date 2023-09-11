@@ -8,7 +8,7 @@ import { DenyButton } from '../denyButton/DenyButton';
 export const PaymentsAgreeOPtions: React.FC = () => {
   const dispatch = useAppDispatch();
   const onSubmit = () => {
-    dispatch(setStatusLoan(ELoanSteps.DocumentAccepted));
+    dispatch(setStatusLoan(ELoanSteps.DocumentsSigned));
     dispatch(formDocuments());
   };
   const form = (

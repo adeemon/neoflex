@@ -27,13 +27,24 @@ const App: React.FC = () => {
   const storedStatus = useSelector(selectStoredStatus);
   const storedAppId = useSelector(selectStoredApplicationId);
   const loanStatus = useSelector(selectLoanStatus);
-  const restored = useSelector(selectIsRestored);
+  const isRestored = useSelector(selectIsRestored);
   const applicationId = useSelector(selectAppId);
+  const [restored, setIsRestored] = React.useState(false);
   React.useEffect(() => {
+    console.log();
+    console.log(localStorage);
     dispatch(getStateFromStorage());
   }, []);
   React.useEffect(() => {
-    restored && dispatch(saveStatus(loanStatus));
+    if (isRestored) {
+      dispatch(setAppId(storedAppId));
+      dispatch(setStatusLoan(storedStatus));
+      dispatch(setLoans(storedOffers));
+      setIsRestored(true);
+    }
+  }, [isRestored]);
+  React.useEffect(() => {
+    isRestored && dispatch(saveStatus(loanStatus));
     if (loanStatus === ELoanSteps.AppClosed
       || loanStatus === ELoanSteps.ScoringRejected) {
       dispatch(denyApplication());
@@ -41,23 +52,16 @@ const App: React.FC = () => {
     }
   }, [loanStatus]);
   React.useEffect(() => {
-    restored && dispatch(saveLoans(loanOffers));
+    isRestored && dispatch(saveLoans(loanOffers));
   }, [loanOffers]);
   React.useEffect(() => {
-    restored && dispatch(saveApplicationId(applicationId));
+    isRestored && dispatch(saveApplicationId(applicationId));
   }, [applicationId]);
-  React.useEffect(() => {
-    if (restored) {
-      dispatch(setAppId(storedAppId));
-      dispatch(setStatusLoan(storedStatus));
-      dispatch(setLoans(storedOffers));
-    }
-  }, [restored]);
   return (
     <>
       <Header />
       <main>
-        <Outlet />
+        { restored && isRestored && <Outlet /> }
       </main>
       <Footer />
     </>

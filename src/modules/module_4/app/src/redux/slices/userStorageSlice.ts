@@ -14,7 +14,7 @@ const initialState: IUserStorage = {
   isSubscribed: false,
   currentApplication: null,
   offersList: [],
-  status: ELoanSteps.AppInit,
+  status: ELoanSteps.Null,
   isRestored: false,
 };
 
@@ -28,6 +28,8 @@ const userStoragSlice = createSlice({
       const localSStatus = localStorage.getItem('status');
       if (localSStatus) {
         state.status = JSON.parse(localSStatus) as ELoanSteps;
+      } else {
+        state.status = ELoanSteps.AppInit;
       }
       if (localSAppId) {
         state.currentApplication = Number.parseInt(localSAppId, 10);

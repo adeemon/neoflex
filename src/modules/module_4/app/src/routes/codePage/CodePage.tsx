@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CrediCongratulations } from '../../components/creditCongratulations/CreditCongratulations';
+import { Spinner } from '../../components/spinner/Spinner';
 import { ELoanSteps } from '../../interfaces';
-import { postCode, selectLoanStatus, setStatusLoan } from '../../redux/slices/loanOffersSlice';
+import { postCode, selectIsLoading, selectLoanStatus, setStatusLoan } from '../../redux/slices/loanOffersSlice';
 import { useAppDispatch } from '../../redux/store/store';
 
 export const CodePage: React.FC = () => {
@@ -12,6 +13,7 @@ export const CodePage: React.FC = () => {
   const currentState = useSelector(selectLoanStatus);
   const isError = currentState === ELoanSteps.CodeRejected;
   const isCompleted = currentState === ELoanSteps.CreditIssued;
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
     if (isCodeInputed) {
       dispatch(postCode(inputedNumber));
@@ -67,10 +69,10 @@ export const CodePage: React.FC = () => {
   );
 
   return (
-    <>
+    <Spinner isLoading={ isLoading }>
       { isCompleted
         ? <CrediCongratulations />
         : codeStep }
-    </>
+    </Spinner>
   );
 };

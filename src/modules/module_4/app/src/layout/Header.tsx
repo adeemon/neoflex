@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ButtonMain } from '../components/ui-toolkit/buttonMain/ButtonMain';
-
 
 const Header: React.FC = () =>
   (
@@ -18,9 +17,13 @@ const Header: React.FC = () =>
       <nav className="header__nav">
         <ul className="main-navigation">
           <li className="main-navigation__element">
-            <Link to="/loan/prescoring" className="main-navigation__link">
-              Credit card
-            </Link>
+            <NavLink
+              to="loan"
+              className={ ({ isActive }) =>
+                `main-navigation__link${(isActive ? '-active' : '')}` }
+            >
+              Product card
+            </NavLink>
           </li>
           <li className="main-navigation__element">
             <a className="main-navigation__link" href="/" target="_self">

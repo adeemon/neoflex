@@ -4,14 +4,16 @@ import { CheckboxAgreeForm } from '../../components/checkboxAgreeForm/CheckboxAg
 import { ReactComponent as FileIcon }
   from '../../assets/images/design/File_dock_duotone.svg';
 import ExampleDox from '../../assets/files/credit-card-offer.pdf';
-import { selectLoanStatus, signDocuments } from '../../redux/slices/loanOffersSlice';
+import { selectIsLoading, selectLoanStatus, signDocuments } from '../../redux/slices/loanOffersSlice';
 import { ELoanSteps } from '../../interfaces';
 import { TitleDescTextBlock } from '../../components/ui-toolkit/titleDescTextBlock/titleDescTextBlock';
 import { useAppDispatch } from '../../redux/store/store';
+import { Spinner } from '../../components/spinner/Spinner';
 
 export const DocumentsSign: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isSigned = useSelector(selectLoanStatus) === ELoanSteps.DocumentsSigned;
+  const isSigned = useSelector(selectLoanStatus) === ELoanSteps.SignAccepted;
+  const isLoading = useSelector(selectIsLoading);
   const onSign = () => {
     dispatch(signDocuments());
   };
@@ -62,7 +64,7 @@ export const DocumentsSign: React.FC = () => {
   );
 
   return (
-    <>
+    <Spinner isLoading={ isLoading }>
       { isSigned
         ? (
           <TitleDescTextBlock
@@ -70,8 +72,7 @@ export const DocumentsSign: React.FC = () => {
             desc="Within 10 minutes you will be sent a PIN code to your email for confirmation"
           />
         )
-
         : dockumentsToSign }
-    </>
+    </Spinner>
   );
 };

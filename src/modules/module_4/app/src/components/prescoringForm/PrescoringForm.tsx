@@ -8,13 +8,13 @@ import { format, subYears } from 'date-fns';
 import { Select } from '../select/Select';
 import { parseDateString } from '../../utils';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
-import { Slider } from '../ui-toolkit/slider/Slider';
-import { Spinner } from '../spinner/Spinner';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
 import { useAppDispatch } from '../../redux/store/store';
 import { getLoansByPrescoring, selectLoanStatus } from '../../redux/slices/loanOffersSlice';
 import { ELoanSteps } from '../../interfaces';
+import { SelectAmount } from '../selectAmount/SelectAmount';
+import { Spinner } from '../spinner/Spinner';
 
 
 const formDataSchema = Yup.object({
@@ -36,18 +36,14 @@ const formDataSchema = Yup.object({
     .required('Enter your password series')
     .min(1000, 'The series must be 4 digits')
     .max(9999, 'The series must be 4 digits'),
-  amount: Yup.number()
-    .min(15000, 'Amount must be more than 15000')
-    .max(600000, 'Amount must be less than 600000')
-    .required('Enter an valid amount')
-    .typeError('Enter an valid amount'),
 });
 
 export type TPrescoringFormData = InferType<typeof formDataSchema>;
+export type TPostLoanTypeData = TPrescoringFormData & { amount: number };
 
 export const PrescoringForm: React.FC = () => {
   const [isValidated, setIsValidated] = React.useState(false);
-  const [amount, setAmount] = React.useState(1);
+  const [amount, setAmount] = React.useState(50000);
   const dispatch = useAppDispatch();
   const loanStatus = useSelector(selectLoanStatus);
   const isLoading = loanStatus === ELoanSteps.WaitingPrescoringAnswer;
@@ -59,8 +55,7 @@ export const PrescoringForm: React.FC = () => {
       firstName: 'Ustimov',
       middleName: 'Abs',
       term: '6',
-      amount: 50000,
-      email: 'aa874193@mail.ru',
+      email: 'adeemon98@gmail.com',
       birthdate: new Date('02.08.1998'),
       passportNumber: 111111,
       passportSeries: 1111,
@@ -71,10 +66,10 @@ export const PrescoringForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<TPrescoringFormData> = (data) => {
-    const output = data;
+    const output: TPostLoanTypeData = { ...data, amount };
     output.term = (output.term.replace(/\D{1,}/, ''));
-    dispatch(getLoansByPrescoring(data));
-    setAmount(data.amount);
+    dispatch(getLoansByPrescoring(output));
+    setAmount(amount);
   };
 
   const onValidAttempt = () => {
@@ -84,47 +79,9 @@ export const PrescoringForm: React.FC = () => {
   const form = (
     <form
       className="prescoring-form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={ handleSubmit(onSubmit) }
       id="prescoring-form"
     >
-      <div className="prescoring-form__customize-card">
-        <div className="prescoring-form__amount">
-          <p className="prescoring-form__title">
-            Customize your card
-          </p>
-          <p className="prescoring-form__step">
-            Step 1 of 5
-          </p>
-          <div className="prescoring-form__select-amount">
-            <p className="prescoring-form__step">
-              Select amount
-            </p>
-            <Controller
-              name="amount"
-              control={ control }
-              render={ ({ field, fieldState: { error } }) =>
-                (
-                  <Input
-                    type="number"
-                    errorMessage={ error?.message }
-                    className="prescoring-form__amount-content"
-                    { ...field }
-                  />
-              ) }
-            />
-            <Slider min={ 15000 } max={ 600000 } current={ amount } />
-          </div>
-        </div>
-        <div className="prescoring-form__result">
-          <p className="prescoring-form__small-title">
-            You have chosen the amount
-          </p>
-          <p className="prescoring-form__amount-content">
-            { amount > 15000 && amount < 600000 ? amount : 'Incorrect amount' }
-          </p>
-        </div>
-      </div>
-
       <div className="prescoring-form__contact-info">
         <p className="prescoring-form__small-title">
           Contact information
@@ -149,7 +106,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -171,7 +128,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -193,7 +150,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -212,7 +169,7 @@ export const PrescoringForm: React.FC = () => {
                     errorMessage={ error?.message }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -234,7 +191,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -256,7 +213,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -279,7 +236,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
           <div className="prescoring-form__input-container">
@@ -302,7 +259,7 @@ export const PrescoringForm: React.FC = () => {
                     isValidated={ isValidated }
                     { ...field }
                   />
-                ) }
+              ) }
             />
           </div>
         </div>
@@ -316,9 +273,16 @@ export const PrescoringForm: React.FC = () => {
     </form>
   );
 
+  const renderElement = (
+    <div className="prescoring-form__wrapper">
+      <SelectAmount />
+      { form }
+    </div>
+  );
+
   return (
-    <>
-      { isLoading ? <Spinner /> : form }
-    </>
+    <Spinner isLoading={isLoading}>
+      {renderElement}
+    </Spinner>
   );
 };

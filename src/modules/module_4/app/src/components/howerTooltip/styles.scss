@@ -1,0 +1,37 @@
+.hower-tooltip {
+    &__container {
+        @include flexCenter;
+        position: relative;
+    }
+    &__hover,
+    &__hover-active {
+        @include flexCenter;
+        position: absolute;
+        top: 80px;
+        right: 8px;
+        padding: 5px;
+        width: 170px;
+        height: 36px;
+        background: #3D3D3D;
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 100%;
+        /* 12px */
+        letter-spacing: 0.24px;
+    }
+    &__hover {
+        display: none;
+    }
+    &__hover-active {
+        display: block
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .hower-tooltip {
+        display: none;
+    }
+}

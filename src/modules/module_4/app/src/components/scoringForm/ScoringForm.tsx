@@ -10,8 +10,9 @@ import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { Input } from '../input/Input';
 import { Label } from '../label/Label';
 import { useAppDispatch } from '../../redux/store/store';
-import { IEmploymentData, IScoringDataToSend } from '../../interfaces';
+import { ELoanSteps, IEmploymentData, IScoringDataToSend } from '../../interfaces';
 import { IPostScoringSign, postScoring, selectAppId } from '../../redux/slices/loanOffersSlice';
+import { ElementFirstOpenWrapper } from '../elementFirstOpenWrapper/ElementFirstOpenWrapper';
 
 
 const formDataSchema = Yup.object({
@@ -137,7 +138,7 @@ export const ScoringForm: React.FC = () => {
                 isInvalid={ invalid }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -153,7 +154,7 @@ export const ScoringForm: React.FC = () => {
                 isInvalid={ invalid }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -169,7 +170,7 @@ export const ScoringForm: React.FC = () => {
                 errorMessage={ error?.message }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container-big">
@@ -190,7 +191,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container-big">
@@ -208,7 +209,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <p className="scoring-form__small-title">Employment</p>
@@ -230,7 +231,7 @@ export const ScoringForm: React.FC = () => {
                 ] }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -248,7 +249,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -266,7 +267,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -282,7 +283,7 @@ export const ScoringForm: React.FC = () => {
                 values={ ['Worker', 'Mid manager', 'Top manager', 'Owner'] }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -303,7 +304,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__input-container">
@@ -324,7 +325,7 @@ export const ScoringForm: React.FC = () => {
                 isValidated={ isValidated }
                 { ...field }
               />
-          ) }
+            ) }
         />
       </div>
       <div className="scoring-form__button-wrapper">
@@ -341,5 +342,12 @@ export const ScoringForm: React.FC = () => {
     </form>
   );
 
-  return <>{ form }</>;
+  return (
+    <ElementFirstOpenWrapper
+      previousState={ ELoanSteps.LoansSended }
+      newState={ ELoanSteps.ScoringStarted }
+    >
+      { form }
+    </ElementFirstOpenWrapper>
+  );
 };

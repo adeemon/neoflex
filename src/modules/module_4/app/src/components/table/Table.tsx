@@ -73,7 +73,12 @@ const getSortWay = (sortedArray: ISortedKey[], key: string): ISortWays =>
 export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
   const [sortedKey, setSortedKey] = React.useState<ISortedKey[]>([]);
   const getKeys = keys.map((key) => {
-    let isKeySorted = isSortedKeysArrayIncludesKey(sortedKey, key);
+    let notSortedOrAscendente = false;
+    const isKeySorted = isSortedKeysArrayIncludesKey(sortedKey, key);
+    if (isKeySorted) {
+      console.log(Object.values(getSortWay(sortedKey, key.replace(' ', '')))[0], 'Descendente');
+      notSortedOrAscendente = Object.values(getSortWay(sortedKey, key.replace(' ', '')))[0] === 'Descendente';
+    }
     return (
       <th className="table__key-wrapper" key={ key }>
         <p className="table__key-title">{key}</p>
@@ -82,6 +87,7 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
           className="table__key-button"
           onClick={() => {
             if (isKeySorted) {
+              console.log(isKeySorted);
               setSortedKey(
                 sortedKey.map((element) => {
                   if (element.key === key) {
@@ -91,10 +97,13 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
                     };
                     if (newSortedKey.sortWay.sortWay === 'None') {
                       newSortedKey.sortWay.sortWay = 'Ascendente';
+                      notSortedOrAscendente = true;
                     } else if (newSortedKey.sortWay.sortWay === 'Ascendente') {
                       newSortedKey.sortWay.sortWay = 'Descendente';
+                      notSortedOrAscendente = false;
                     } else if (newSortedKey.sortWay.sortWay === 'Descendente') {
                       newSortedKey.sortWay.sortWay = 'Ascendente';
+                      notSortedOrAscendente = true;
                     }
                     return newSortedKey;
                   }
@@ -110,7 +119,7 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
             }
           }}
         >
-          {isKeySorted ? <ArrowUp /> : <ArrowDown />}
+          {!notSortedOrAscendente ? <ArrowUp /> : <ArrowDown />}
         </button>
       </th>
     );

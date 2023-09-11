@@ -24,21 +24,21 @@ export const ExchangeNote: React.FC<IExchangeNoteProps> = ({ currencyName, defau
         if (result.status === 502) {
           await subscribeCurrency();
         } else if (result.status !== 200) {
-          setTimeout(() => {}, 100000);
-          await subscribeCurrency();
+          setTimeout(() =>
+          subscribeCurrency(), 100000);
         } else {
           const message = await result.text();
           const newValue = Number(message).toFixed(2);
           setExchanheValue(Number(newValue));
-          setTimeout(() => {}, 900000);
-          await subscribeCurrency();
+          setTimeout(() =>
+            subscribeCurrency(), 900000);
         }
       } catch {
         console.error('Ошибка в получении данных с сервера обмена валют');
       }
     }
     subscribeCurrency();
-  });
+  }, []);
 
   return (
     <li className="exchange__rate">

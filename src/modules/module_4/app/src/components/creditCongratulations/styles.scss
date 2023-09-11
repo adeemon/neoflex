@@ -8,4 +8,13 @@
         height: 50px;
         border-radius: 16px;
     }
+    &__img {
+        @include flexCenter;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .credit-congrat {
+        padding: 5px;
+    }
 }

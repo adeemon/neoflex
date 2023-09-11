@@ -26,7 +26,7 @@ const chooseAnOffer = (
 const getContinueRegButton = (dispatch: AppDispatch, offer: IloanOffer | null, disabled?: boolean) => {
   const onClick = () => {
     dispatch(postChoosedOffer(offer));
-    dispatch(setStatusLoan(ELoanSteps.LoandSended));
+    dispatch(setStatusLoan(ELoanSteps.LoansSended));
   };
   return (
     <ButtonMain

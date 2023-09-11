@@ -10,6 +10,7 @@ export interface IloanOffer {
 }
 
 export enum ELoanSteps {
+  'Null',
   'AppClosed',
   'Waiting',
   'AppInit',
@@ -17,7 +18,7 @@ export enum ELoanSteps {
   'WaitingPrescoringAnswer',
   'LoanOffers',
   'LoanChoosed',
-  'LoandSended',
+  'LoansSended',
   'ScoringStarted',
   'ScoringSended',
   'StatusWaiting',
@@ -26,9 +27,13 @@ export enum ELoanSteps {
   'DocumentOpened',
   'DocumentAccepted',
   'DocumentsSigned',
+  'SignOpened',
+  'SignAccepted',
+  'CodeStarted',
   'CodeSended',
   'CodeRejected',
   'CreditIssued',
+  'LoanCompleted',
 }
 
 export interface IScoringData {

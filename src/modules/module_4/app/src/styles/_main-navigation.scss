@@ -12,7 +12,8 @@
         width: auto;
         color: inherit;
         &:hover,
-        &:focus {
+        &:focus,
+        &-active {
             color: #b2a35f;
         }
     }

@@ -2,8 +2,8 @@
 @import "../../../assets/styles//vars";
 .platinumCard {
     display: grid;
-    grid-template: 2fr 2fr 2fr 1fr / 3fr 2fr;
-    padding: 48px 101px 34px 32px;
+    grid-template: 2fr 2fr 2fr 1fr / 4fr 2fr;
+    padding: 48px 50px 34px 32px;
     height: auto;
     width: 100%;
     // padding: 78px 40px 70px 32px;
@@ -94,14 +94,26 @@
     }
 }
 
-@media screen and (max-width: calc($tablet)) {
+@media screen and (max-width: ($tablet)) {
     .platinumCard {
-        display: flex;
+        @include flexCenter;
         flex-direction: column;
         gap: 20px;
         padding: 20px;
+        text-align: center;
         &__image {
             display: none;
+        }
+        &__desc {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: ($mobile)) {
+    .platinumCard {
+        & .default-button {
+            width: 90%;
         }
     }
 }

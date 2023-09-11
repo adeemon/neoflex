@@ -66,7 +66,9 @@ export const LoanOffer: React.FC<IloanOffer> = ({
           <InputFieldIcon isValidated isInvalid={ isSalaryClient } />
         </li>
       </ul>
-      <ButtonMain label="Select" className="loanOffer__button" onClick={ onSelectHandler } />
+      <a href="#platinum-card-id">
+        <ButtonMain label="Select" className="loanOffer__button" onClick={ onSelectHandler } />
+      </a>
     </div>
   );
 };
