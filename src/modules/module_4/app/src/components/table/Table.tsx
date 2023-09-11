@@ -76,7 +76,6 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
     let notSortedOrAscendente = false;
     const isKeySorted = isSortedKeysArrayIncludesKey(sortedKey, key);
     if (isKeySorted) {
-      console.log(Object.values(getSortWay(sortedKey, key.replace(' ', '')))[0], 'Descendente');
       notSortedOrAscendente = Object.values(getSortWay(sortedKey, key.replace(' ', '')))[0] === 'Descendente';
     }
     return (
@@ -87,7 +86,6 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
           className="table__key-button"
           onClick={() => {
             if (isKeySorted) {
-              console.log(isKeySorted);
               setSortedKey(
                 sortedKey.map((element) => {
                   if (element.key === key) {

@@ -5,6 +5,7 @@
     padding: 32px;
     background-color: #FFFFFF;
     border-radius: 28px;
+    border: 1px solid white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.20);
     &__offer-condition {
         @include flexCenter;
@@ -29,5 +30,8 @@
         margin-top: 90px;
         height: 48px;
         width: 148px;
+    }
+    &:hover {
+        border: 1px solid rgba(0, 60, 255, 1);
     }
 }

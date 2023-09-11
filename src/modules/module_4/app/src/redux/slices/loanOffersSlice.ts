@@ -180,20 +180,6 @@ string,
   const result = await fetch(requestPath, requestOptions);
   const output = (await result.json()) as ICodeApiResponse;
   return output;
-  // console.log(result.status);
-  // console.log(await (await result).json());
-  // if (result.status === 200) {
-  //   console.log('Done!');
-  //   return result.json();
-  // }
-  // if (result.status === 415) {
-  //   console.log(result.status);
-  //   console.log('415');
-  // }
-  // if (result.status !== 200) {
-  //   console.log(result.status, typeof result.status);
-  //   console.log('!200');
-  // }
 });
 
 const loanOffersSlice = createSlice({
@@ -229,7 +215,6 @@ const loanOffersSlice = createSlice({
       console.error('Ошибка в фетче предложений');
     });
     builder.addCase(postChoosedOffer.fulfilled, (state) => {
-      console.log('Произошел футч');
       state.status = ELoanSteps.LoansSended;
     });
     builder.addCase(postScoring.rejected, (state) => {

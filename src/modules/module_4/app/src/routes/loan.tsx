@@ -12,7 +12,6 @@ export const navigateLoan = (
   applicationId: number | null,
   navigate: NavigateFunction,
 ) => {
-  console.log('navigated by loan');
   switch (status) {
     case (ELoanSteps.AppInit): {
       navigate('/loan/prescoring', { replace: true });
@@ -89,10 +88,6 @@ export const Loan: React.FC = () => {
   const dispatch = useDispatch();
   const isWaiting = currentStatus === ELoanSteps.Waiting;
   useEffect(() => {
-    console.log(currentStatus);
-    console.log(localStorage);
-    console.log(isRestored);
-    console.log('Status =', ELoanSteps[currentStatus]);
     isRestored
       && navigateLoan(currentStatus, applicationId, navigate);
     if (currentStatus === ELoanSteps.LoanCompleted) {

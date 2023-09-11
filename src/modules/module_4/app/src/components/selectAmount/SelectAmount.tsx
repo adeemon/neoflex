@@ -24,7 +24,6 @@ export const SelectAmount: React.FC = () => {
 
   const onSubmit: SubmitHandler<TSelectAmountData> = (data) => {
     setAmountTemp(data.amount);
-    console.log('choosed to', data.amount);
   };
 
   const form = (

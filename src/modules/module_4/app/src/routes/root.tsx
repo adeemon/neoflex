@@ -31,8 +31,6 @@ const App: React.FC = () => {
   const applicationId = useSelector(selectAppId);
   const [restored, setIsRestored] = React.useState(false);
   React.useEffect(() => {
-    console.log();
-    console.log(localStorage);
     dispatch(getStateFromStorage());
   }, []);
   React.useEffect(() => {
