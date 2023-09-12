@@ -22,9 +22,6 @@ export const ElementFirstOpenWrapper: React.FC<IProps> = (
   const currentState = useSelector(selectLoanStatus);
   const isRestored = useSelector(selectIsRestored);
   React.useEffect(() => {
-    console.log('Im in wrapper');
-    console.log(localStorage);
-    console.log(ELoanSteps[currentState], isRestored);
     if (isRestored && previousState === currentState) {
       dispatch(setStatusLoan(newState));
     }
