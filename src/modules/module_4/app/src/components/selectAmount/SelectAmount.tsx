@@ -6,7 +6,10 @@ import { Input } from '../input/Input';
 import { Slider } from '../ui-toolkit/slider/Slider';
 
 const formDataSchema = Yup.object({
-  amount: Yup.number().required().min(15000, 'Input more 15000').max(600000, 'Input less 600000'),
+  amount: Yup.number().required('Input number')
+    .typeError('Input number')
+    .min(15000, 'Input more 15000')
+    .max(600000, 'Input less 600000'),
 });
 
 export type TSelectAmountData = Yup.InferType<typeof formDataSchema>;
@@ -29,7 +32,8 @@ export const SelectAmount: React.FC = () => {
   const form = (
     <form
       className="select-amount-form"
-      onSubmit={ handleSubmit(onSubmit) }
+      onSubmit={handleSubmit(onSubmit)}
+      onChange={handleSubmit(onSubmit)}
     >
       <div className="select-amount-form__customize-card">
         <div className="select-amount-form__amount">
