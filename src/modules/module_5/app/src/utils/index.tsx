@@ -1,6 +1,6 @@
 import { parse } from 'date-fns';
 import { IloanOffer } from '../interfaces';
-
+import * as Randomstring from 'randomstring';
 
 export function flilterText(inputText: string) {
   const hashtagsRegex = /#[^\s]{1,}\s'/;
@@ -56,3 +56,13 @@ export const insertSpaceBeforeUpperLetter = (inputString: string) => {
   }
   return `${inputString.slice(0, indexOfFirstUpper)} ${inputString.slice(indexOfFirstUpper)}`;
 };
+
+export const getRandomNumber = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const getRandomString = (length: number) => {
+  return Randomstring.generate(length);
+}

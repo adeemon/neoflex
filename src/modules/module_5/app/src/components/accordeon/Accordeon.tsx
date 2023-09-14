@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { ReactComponent as Opened } from '../../assets/images/design/Expand_down.svg';
 import { ReactComponent as Closed } from '../../assets/images/design/Expand_up.svg';
 
