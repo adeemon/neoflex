@@ -4,14 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import { Checkbox } from './Checkbox';
 
-interface InputProps {
-  name: string;
-  label?: string | null;
-  errorMessage?: string;
-  id: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 const randNumber = getRandomNumber(1, 10);
 
 const name = getRandomString(randNumber);
