@@ -3,8 +3,7 @@
         @include flexCenter;
         position: relative;
     }
-    &__hover,
-    &__hover-active {
+    &__hover {
         @include flexCenter;
         position: absolute;
         top: 80px;
@@ -21,12 +20,6 @@
         line-height: 100%;
         /* 12px */
         letter-spacing: 0.24px;
-    }
-    &__hover {
-        display: none;
-    }
-    &__hover-active {
-        display: block
     }
 }
 

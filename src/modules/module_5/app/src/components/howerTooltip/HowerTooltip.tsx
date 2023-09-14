@@ -16,6 +16,12 @@ export const HowerTooltip: React.FC<IProps> = ({ children, description }) => {
     setIsHover(false);
   };
 
+  const tooltip = (
+    <div className={`hower-tooltip__hover${isHover ? '-active' : ''}`}>
+      {description}
+    </div>
+  );
+
   return (
     <div className="hower-tooltip__container">
       <div className="hower-tooltip__element"
@@ -24,9 +30,7 @@ export const HowerTooltip: React.FC<IProps> = ({ children, description }) => {
       >
         { children }
       </div>
-      <div className={`hower-tooltip__hover${isHover ? '-active' : ''}`}>
-        {description}
-      </div>
+      {isHover && tooltip}
     </div>
   );
 };
