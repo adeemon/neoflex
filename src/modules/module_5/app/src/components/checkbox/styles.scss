@@ -1,0 +1,34 @@
+.checkbox {
+    &__wrapper {
+        @include flexCenter;
+        gap: 14px;
+        min-height: 4em;
+        width: fit-content;
+    }
+    &__check,
+    &__check-checked {
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        border: 1px solid #808080;
+        background: #FFF;
+    }
+    &__check-checked {
+        background-position: center;
+        background-image: url('../../assets/images/design/Checkbox\ checked.svg');
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__title {
+        color: #1A202C;
+        text-align: center;
+        font-family: "Ubuntu";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+}

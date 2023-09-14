@@ -1,0 +1,59 @@
+.infoCardTitleDesc {
+    @include flexCenter;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px;
+    width: 100%;
+    height: 236px;
+    border-radius: 28px;
+    &__title {
+        @include flexStart;
+        margin-left: 0;
+        width: 100%;
+        color: black;
+        font-size: 36px;
+        font-family: "Ubuntu";
+        font-weight: 700;
+        line-height: 53.06px;
+        word-wrap: break-word;
+    }
+    &__description {
+        @include flexStart;
+        margin-left: 0;
+        width: 100%;
+        margin-left: 0;
+        color: rgba(67, 67, 67, 0.9);
+        font-size: 16px;
+        font-family: "Ubuntu";
+        font-weight: 500;
+        line-height: 23.58px;
+        word-wrap: break-word;
+    }
+    &-gray {
+        background: rgba(127, 146, 172, 0.7);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+    }
+    &-bone {
+        border-radius: 28px;
+        background: #eaecee;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2), 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+    }
+    &__icon-container {
+        @include flexStart;
+        width: 100%;
+        & svg {
+            height: 40px;
+            width: 40px;
+        }
+    }
+    & div {
+        @include flexStart;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .infoCardTitleDesc {
+        padding: 20px;
+        height: auto;
+    }
+}
