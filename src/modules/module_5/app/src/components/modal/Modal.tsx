@@ -61,14 +61,14 @@ export const Modal = ({
         ref.current && !isClickInsideRectangle(e, ref.current) && onClose() }
     >
       <div className="modal">
-      <p className="modal__title">
-        { title }
-      </p>
-      <p className="modal__description">
-        { describtion }
-      </p>
-      <div className="modal__options">
-        { !isOnlyProceed
+        <p className="modal__title">
+          { title }
+        </p>
+        <p className="modal__description">
+          { describtion }
+        </p>
+        <div className="modal__options">
+          { !isOnlyProceed
           && (
             <ButtonMain
               type="button"
@@ -78,13 +78,13 @@ export const Modal = ({
             >{ cancelLabel }
             </ButtonMain>
           ) }
-        <ButtonMain
-          type="button"
-          onClick={ onClose }
-          className="modal__proceed-button"
-        >{ proceedLabel }
-        </ButtonMain>
-      </div>
+          <ButtonMain
+            type="button"
+            onClick={ onClose }
+            className="modal__proceed-button"
+          >{ proceedLabel }
+          </ButtonMain>
+        </div>
       </div>
     </dialog>
   );

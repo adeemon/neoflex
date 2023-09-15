@@ -4,7 +4,6 @@ import errorMessage from '../../assets/images/design/404.png';
 import { ButtonMain } from '../ui-toolkit/buttonMain/ButtonMain';
 import { ImageFigured } from '../ui-toolkit/imageFigured/ImageFigured';
 
-
 export const Error404: React.FC = () =>
   (
     <section className="error404">

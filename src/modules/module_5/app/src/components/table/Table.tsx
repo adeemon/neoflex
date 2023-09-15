@@ -80,11 +80,11 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
     }
     return (
       <th className="table__key-wrapper" key={ key }>
-        <p className="table__key-title">{key}</p>
+        <p className="table__key-title">{ key }</p>
         <button
           type="button"
           className="table__key-button"
-          onClick={() => {
+          onClick={ () => {
             if (isKeySorted) {
               setSortedKey(
                 sortedKey.map((element) => {
@@ -115,9 +115,9 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
               };
               setSortedKey([...sortedKey, newSortedKey]);
             }
-          }}
+          } }
         >
-          {!notSortedOrAscendente ? <ArrowUp /> : <ArrowDown />}
+          { !notSortedOrAscendente ? <ArrowUp /> : <ArrowDown /> }
         </button>
       </th>
     );
@@ -151,7 +151,7 @@ export const Table: React.FC<ITableProps> = ({ rows, keys }) => {
     if (row.cells) {
       output = row.cells.map((cell, index) =>
         (
-          <td className="table__cell" key={index}>{ cell.value }</td>
+          <td className="table__cell" key={ index }>{ cell.value }</td>
         ));
     }
     return (
