@@ -1,0 +1,43 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__field-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 8px 0 8px;
+        height: 40px;
+        border-radius: 6px;
+        background: #f9f5e3;
+        color: black;
+        font-size: 14px;
+        font-family: "Ubuntu";
+        font-weight: 400;
+        line-height: 14px;
+        word-wrap: break-word;
+        &::placeholder {
+            color: #808080;
+            font-size: 14px;
+            font-family: "Ubuntu";
+            font-weight: 400;
+            line-height: 14px;
+            word-wrap: break-word;
+        }
+        &:hover,
+        &:focus {
+            border: 2px solid #b4387a;
+        }
+    }
+    &__field {
+        background: none;
+        border: none;
+    }
+    &__error-message {
+        color: #ff5631;
+        font-size: 16px;
+        font-family: "Ubuntu";
+        font-weight: 500;
+        line-height: 16px;
+        word-wrap: break-word;
+    }
+}

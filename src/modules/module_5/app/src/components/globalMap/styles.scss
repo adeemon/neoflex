@@ -1,0 +1,29 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles//vars";
+.map {
+    @include flexCenter;
+    gap: 20px;
+    flex-direction: column;
+    &__title {
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+    &__description {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 50px;
+        text-align: center;
+    }
+    &__image-container {
+        @include flexCenter;
+        width: 90vw;
+    }
+    &__image {
+        height: 100%;
+        width: 100%;
+    }
+}

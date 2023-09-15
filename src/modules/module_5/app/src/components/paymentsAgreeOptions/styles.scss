@@ -1,0 +1,6 @@
+.paymentAgreeOptions {
+    &__wrapper {
+        @include flexCenter;
+        justify-content: space-between;
+    }
+}

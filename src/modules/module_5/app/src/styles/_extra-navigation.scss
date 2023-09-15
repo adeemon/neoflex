@@ -1,0 +1,12 @@
+.extra-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-flow: row wrap;
+    &__link {
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Ubuntu';
+    }
+}
