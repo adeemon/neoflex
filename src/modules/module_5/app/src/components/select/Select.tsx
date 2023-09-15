@@ -1,22 +1,23 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 export interface ISelectProps {
   values: string[];
   errorMessage?: string;
   isInvalid?: boolean;
-  onChange: (value: string) => void;
 }
 
 export const Select = forwardRef<HTMLSelectElement, ISelectProps>(
-  ({ values, errorMessage, isInvalid, onChange }, ref) =>
-    (
+  ({ values, errorMessage, isInvalid }, ref) => {
+    const [selected, SetSelected] = useState(values[0]);
+    return (
       <div className="select">
         <div className={ `select__container${isInvalid ? '-invalid' : ''}` }>
           <select
             className="select__field"
-            ref={ ref }
+            ref={ref}
+            defaultValue={selected}
             onChange={ (e) =>
-              onChange(e.target.value) }
+              SetSelected(e.target.value) }
           >
             { /* <option disabled selected value="" aria-label="empty thing" /> */ }
             { values.map((element, index) =>
@@ -27,9 +28,10 @@ export const Select = forwardRef<HTMLSelectElement, ISelectProps>(
               )) }
           </select>
         </div>
-        { errorMessage && <p className="select__error-message">{ errorMessage }</p> }
+        { isInvalid && errorMessage && <p className="select__error-message">{ errorMessage }</p> }
       </div>
-    ),
+    );
+  },
 );
 
 Select.displayName = 'Select';
