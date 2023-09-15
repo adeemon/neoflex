@@ -1,0 +1,25 @@
+.slider {
+    &__wrapper {
+        @include flexCenter;
+        width: 100%;
+    }
+    &__complete {
+        border-bottom: solid 2px #5B35D5;
+        content: '';
+    }
+    &__uncomplete{
+        width: auto;
+        border-bottom: solid 2px #E2E8F0;
+    }
+    &__values {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        color: #786D6D;
+        font-size: 16px;
+        font-family: "Ubuntu";
+        font-weight: 500;
+        line-height: 16px;
+        word-wrap: break-word
+    }
+}

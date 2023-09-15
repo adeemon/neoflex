@@ -1,0 +1,12 @@
+.loanOffers {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+@media screen and (max-width: $tablet) {
+    .loanOffers {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
