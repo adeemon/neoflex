@@ -1,8 +1,8 @@
-import { forwardRef, HTMLInputTypeAttribute } from 'react';
+import { forwardRef, HTMLInputTypeAttribute, useState } from 'react';
 import { InputFieldIcon } from '../ui-toolkit/inputFieldIcon/inputFieldIcon';
 
 
-interface InputProps {
+export interface InputProps {
   name: string;
   value: string | null | Date | number;
   label?: string | null;
@@ -12,7 +12,6 @@ interface InputProps {
   isValidated?: boolean;
   errorMessage?: string;
   className?: string;
-  onChange: (value: string) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({
@@ -25,9 +24,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
   isValidated,
   errorMessage,
   className,
-  onChange,
-}, ref) =>
-  (
+}, ref) => {
+  const [valueInner, setValueInner] = useState(value);
+  return (
     <div className="input__container" ref={ ref }>
       { label && <label className="input__label" htmlFor={ name }>{ label }</label> }
       <div className={ `input__field-container ${isInvalid ? 'invalid' : 'valid'}` }>
@@ -36,11 +35,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
           ref={ ref }
           id={ name }
           name={ name }
+          aria-label={ name }
           placeholder={ placeholder }
           type={ type }
-          value={ value?.toString().replace(/ +/g, ' ') }
+          value={ valueInner?.toString().replace(/ +/g, ' ') }
           onChange={ (e) =>
-            onChange(e.target.value) }
+            setValueInner(e.target.value) }
         />
         <InputFieldIcon isInvalid={ isInvalid } isValidated={ isValidated } />
       </div>
@@ -50,7 +50,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
         </div>
       ) }
     </div>
-  ));
+  );
+});
 
 Input.defaultProps = {
   label: undefined,
