@@ -34,6 +34,7 @@ export const ExchangeNote: React.FC<IExchangeNoteProps> = ({ currencyName, defau
             subscribeCurrency(), 900000);
         }
       } catch {
+        setExchanheValue(0);
         console.error('Ошибка в получении данных с сервера обмена валют');
       }
     }
@@ -43,7 +44,7 @@ export const ExchangeNote: React.FC<IExchangeNoteProps> = ({ currencyName, defau
   return (
     <li className="exchange__rate">
       <span className="exchange__currency-title">{ currencyName }:</span>
-      <span className="exchange__currency-value" id="EXCHANGE_USD">{ exchangeValue }</span>
+      <span className="exchange__currency-value" id={`EXCHANGE_${currencyName}`}>{ exchangeValue }</span>
     </li>
   );
 };
